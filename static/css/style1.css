@@ -1,0 +1,88 @@
+body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background-color: #f9f9f9;
+}
+
+.sidebar {
+    height: 100vh;
+    background-color: #2C3E50;
+    padding-top: 20px;
+    color: #ecf0f1;
+}
+
+.sidebar a {
+    display: block;
+    color: #ecf0f1;
+    padding: 15px 20px;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.sidebar a.active, .sidebar a:hover {
+    background-color: #34495E;
+    border-radius: 5px;
+}
+
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.card h5 {
+    font-size: 18px;
+    color: #7f8c8d;
+}
+
+.card h2 {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.chart-container {
+    margin-top: 30px;
+}
+
+.chart-container h5 {
+    font-size: 18px;
+    color: #34495e;
+    font-weight: bold;
+}
+
+.welcome-message {
+    background-color: #ecf0f1;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.welcome-message h3 {
+    font-weight: bold;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+}
+
+.profile img {
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.small-chart {
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+#page-content-wrapper {
+    width: calc(100%-50%);
+    margin-top: 0;
+    margin-left: 0;
+    transition: margin-left 0.3s ease, width 0.3s ease;
+    
+}
+#wrapper.toggled #page-content-wrapper {
+    margin-left: 150px;
+}

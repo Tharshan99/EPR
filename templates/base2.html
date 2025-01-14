@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>{% block title %}Dashboard{% endblock %}</title>
+    <meta name="description" content="Dashboard for customer and supplier data" />
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link href="{{ url_for('static', filename='css/font-awesome.min.css') }}" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+
+    <!-- Custom CSS -->
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css">
+
+      <!-- DataTables CSS and JS -->
+      <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+
+    {% block styles %}
+    <!-- Additional styles can be added here by child templates -->
+    {% endblock %}
+
+    <style>
+        /* Sidebar Styles */
+        #sidebar-wrapper {
+            font-family: 'Poppins', sans-serif;
+            font-size: 12px;
+            width: 180px;
+            position: fixed;
+            top: 0px; /* Offset for header height */
+            left: 0;
+            height: calc(100% - 0px); /* Full height minus header */
+            z-index: 1000;
+            color: #fff;
+            transition: transform 0.3s ease;
+        }
+
+        /* Sidebar hidden */
+        #wrapper:not(.toggled) #sidebar-wrapper {
+            transform: translateX(-100%);
+        }
+
+        /* Sidebar link styling */
+        .list-group-item {
+            color: #fff !important;
+            padding-left: 20px;
+        }
+
+        .list-group-item:hover {
+            background-color: gainsboro;
+        }
+
+        /* Content Wrapper for full width */
+        #page-content-wrapper {
+            width: calc(100%-50%);
+            margin-top: 0;
+            margin-left: 0;
+            transition: margin-left 0.3s ease, width 0.3s ease;
+            
+        }
+        
+
+        /* Footer styling */
+        footer {
+            position: fixed;
+            background-color: #5daa60;
+            color: white;
+            font-size: small;
+            padding: 15px 0;
+            text-align: center;
+            bottom: 0;
+            width: 100%;
+            height: 50px;
+        }
+
+        /* Header Styling */
+        .header-navbar {
+            font-family: 'Poppins', sans-serif;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            transition: top 0.3s ease;
+            z-index: 1050;
+            padding: 0px;
+            /* Decrease nav bar height */
+            height: 55px;
+        }
+
+        /* Adjust header and content when sidebar is visible */
+        #wrapper.toggled .header-navbar {
+            margin-left: 180px;
+            width: calc(100% - 180px);
+        }
+
+        #wrapper.toggled #page-content-wrapper {
+            margin-left: 150px;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            font-size: 12px; /* Base font size */
+    }
+
+    /* Adjust font size for smaller screens */
+    @media (max-width: 768px) {
+        body {
+            font-family: 'Poppins', sans-serif;
+            font-size: 12px; /* Smaller font size for tablets and smaller devices */
+        }
+    }
+
+    @media (max-width: 480px) {
+        body {
+            font-family: 'Poppins', sans-serif;
+            font-size: 12px; /* Even smaller font size for mobile devices */
+        }
+    }
+
+    /* Sidebar and other specific areas */
+    #sidebar-wrapper h2 {
+        font-family: 'Poppins', sans-serif;
+        font-size: 20px;
+    }
+
+    @media (max-width: 768px) {
+        #sidebar-wrapper h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        #sidebar-wrapper h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+        }
+    }
+
+    /* Adjust font size for navbar */
+    .navbar-brand {
+        font-family: 'Poppins', sans-serif;
+        font-size: 18px;
+        padding : 5px;
+    }
+
+    .navbar-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        #menu-toggle {
+            font-size: 1.2rem;
+            color: #000;
+            background: none;
+            border: none;
+            padding: 0;
+            margin-right: auto; /* Aligns the button to the left */
+        }
+
+        
+
+    .menu-btn, .navbar-toggler {
+    border: none; /* Removes the border */
+    outline: none; /* Removes any focus outline */
+    box-shadow: none; /* Removes any shadow that might look like a border */
+    background: none; /* Optional: If you want to remove the background color */
+    /* display: flex; Use flexbox for proper alignment */
+    align-items: center; /* Vertically center items */
+    /* justify-content: space-between; Space out text/icon and arrow */
+    color: #ffffff; /* Text color */
+    padding: 10px; /* Add padding */
+    text-decoration: none;
+    }
+
+    .submenu-btn, .subnavbar-toggler {
+    border: none; /* Removes the border */
+    padding-left: 40px;
+    outline: none; /* Removes any focus outline */
+    box-shadow: none; /* Removes any shadow that might look like a border */
+    background: none;
+    /* font-style: italic; Optional: If you want to remove the background color */
+    }
+
+    @media (max-width: 768px) {
+        .navbar-brand {
+            font-size: 16px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .navbar-brand {
+            font-size: 14px;
+        }
+    }
+    
+        /* Responsive font for headings */
+    h1, h2, h3, h4, h5 {
+        font-size: 1.5rem;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    @media (max-width: 768px) {
+        h1, h2, h3, h4, h5 {
+            font-size: 1.25rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        h1, h2, h3, h4, h5 {
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+    }
+
+    /* .kanda_link_list {
+    background-color:rgb(146, 167, 142)
+    } */
+
+    .list-group-item {
+        background-color:rgb(146, 167, 142) 
+    }
+
+    .arrow {
+    display: inline-block;
+    /* margin-left: 100px; Push the arrow to the right */
+    border: solid #ffffff; /* Arrow color */
+    border-width: 0 2px 2px 0; /* Thickness of the arrow */
+    padding: 5px; /* Adjust size */
+    transform: rotate(-45deg); /* Make it point to the right */
+    transition: transform 0.3s ease; /* Smooth rotation on hover */
+    justify-content:right;
+    }
+    .dropdown-toggle[aria-expanded="true"] .arrow {
+        transform: rotate(45deg); /* Rotate to point down */
+    }
+
+    .custom-dropdown {
+    background-color: #3B71CA;
+    border-radius: 8px;
+    padding: 10px 0;
+    min-width: 180px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .custom-dropdown .dropdown-item {
+        padding: 10px 15px;
+        color: #ffffff;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        transition: background-color 0.2s, color 0.2s;
+    }
+
+    .custom-dropdown .dropdown-item:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        color: #ffffff;
+    }
+
+    .custom-dropdown .dropdown-item i {
+        font-size: 16px;
+        margin-right: 8px;
+    }
+
+    /* Specific icon colors */
+    .custom-dropdown .dropdown-item .fa-cog {
+        color: #ffc107;
+    }
+
+    .custom-dropdown .dropdown-item .fa-key {
+        color: #28a745;
+    }
+
+    .custom-dropdown .dropdown-item .fa-power-off {
+        color: #dc3545;
+    }
+
+
+    .navbar-nav {
+            display: flex;
+            align-items: center;
+            padding: 0px;
+            color: #fff;
+        }
+
+        .nav-link {
+            color: #ffffff;
+            padding: 10px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+        }
+
+        /* Fullscreen icon */
+        .nav-item .fas.fa-expand-arrows-alt {
+            font-size: 18px;
+        }
+
+        /* User dropdown */
+        .d-flex.badge-pill {
+            display: flex;
+            align-items: center;
+            padding: 5px;
+            border-radius: 20px;
+            background-color: #3B71CA;
+        }
+
+        .fa-user {
+            font-size: 16px;
+            color: #ffffff;
+            margin-right: 5px;
+        }
+
+        .fa-angle-down {
+            font-size: 12px;
+            color: #ffffff;
+            margin-left: 5px;
+        }
+
+        /* Dropdown menu */
+        .dropdown-menu {
+            background-color: #3B71CA;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0px 0px 0px rgba(247, 247, 247, 0.1);
+            padding: 8px 0;
+            width: 50px;
+            left: -2.5em !important;
+            display: none;
+            position: absolute;
+        }
+        
+        .dropdown-menu.show {
+            display: block;
+        }
+
+        .user-auth-dropdown, .sub-menu .dropdown-menu {
+            display: none;
+            position: absolute;
+        }
+
+        .user-auth-dropdown.show, .sub-menu .dropdown-menu.show {
+            display: block;
+        }
+
+
+        .dropdown-item {
+            color: #ffffff;
+            padding: 10px 20px;
+            font-size: 14px;
+        }
+
+        .dropdown-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .dropdown-item i {
+            margin-right: 8px;
+            font-size: 14px;
+        }
+
+        .circle-logo {
+            width: 80px; /* Adjust the size as needed */
+            height: 80px;
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto; /* Centers the logo horizontally */
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for effect */
+            padding: 10px; /* Add padding to create space inside the circle */
+        }
+        .navbar-nav .fa-expand-arrows-alt {
+            color: #fff;
+        }
+
+        #account_settings {
+            margin-right: 10px; /* Move the button 10px to the left */
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="d-flex mt-0 toggled" id="wrapper">
+        <div id="sidebar-wrapper">
+            <div class="sidebar-heading text-center">
+                <div class="circle-logo">
+                    <a href="{{ url_for('security.logout') }}">
+                        <img 
+                            src="{{ url_for('static', filename='uploads/logo.png') }}" 
+                            class="img-fluid" 
+                            alt="Logo" 
+                            style="width: 100%; height: 100%; object-fit: contain;"
+                        />
+                    </a>
+                </div>
+            </div>
+            
+            {% if current_user.is_authenticated %}
+            <div class="list-group list-group-flush">
+                <a href="{{ url_for('pages.dashboard') }}" class="list-group-item list-group-item-action menu-btn">
+                    &nbsp; &nbsp; &nbsp; &nbsp;
+                    <i class="fas fa-home"></i> &nbsp; Dashboard
+                </a>
+                <!-- Sales Dropdown -->
+                <a href="#salesSubmenu" class="list-group-item dropdown-toggle menu-btn" data-bs-toggle="collapse">
+                    <span class="arrow"></span>
+                    &nbsp; &nbsp;
+                    <i class="fas fa-box"></i> &nbsp; Sales
+                    
+                </a>
+                <div class="collapse" id="salesSubmenu">
+                    <a href="{{ url_for('pages.pick_list') }}" class="list-group-item list-group-item-action pl-4 submenu-btn">&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;Pick List</a>
+                </div>
+                <!-- Purchase Dropdown -->
+                <a href="#purchaseSubmenu" class="list-group-item list-group-item-action dropdown-toggle menu-btn" data-bs-toggle="collapse">
+                    <span class="arrow"></span>
+                    &nbsp; &nbsp;
+                    <i class="fas fa-shopping-cart"></i> &nbsp; Purchase
+                    
+                </a>
+                <div class="collapse" id="purchaseSubmenu">
+                    <a href="{{ url_for('pages.purchase_quotation') }}" class="list-group-item list-group-item-action pl-4 submenu-btn" >Create Supplier Quotation</a>
+                </div>
+                <div class="collapse" id="purchaseSubmenu">
+                    <a href="{{ url_for('pages.purchase_quotation_dashboard') }}" class="list-group-item list-group-item-action pl-4 submenu-btn" >Purchase Quotation Dashboard</a>
+                </div>
+                <div class="collapse" id="purchaseSubmenu">
+                    <a href="{{ url_for('pages.purchase_order_dashboard') }}" class="list-group-item list-group-item-action pl-4 submenu-btn" >Purchase Order Dashboard</a>
+                </div>
+                <div class="collapse" id="purchaseSubmenu">
+                    <a href="{{ url_for('pages.purchase_order') }}" class="list-group-item list-group-item-action pl-4 submenu-btn" >Purchase Receipt Dashboard</a>
+                </div>
+                <!-- Counting Dropdown -->
+                <a href="#countingSubmenu" class="list-group-item list-group-item-action dropdown-toggle menu-btn" data-bs-toggle="collapse">
+                    <span class="arrow"></span>
+                    &nbsp; &nbsp;
+                    <i class="fas fa-layer-group"></i> &nbsp; Counting
+                    
+                </a>
+                <div class="collapse" id="countingSubmenu">
+                    <a href="{{ url_for('pages.create_evening') }}" class="list-group-item list-group-item-action pl-4 submenu-btn" >&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;Create</a>
+                </div>
+                <!-- Overview Dropdown -->
+                <a href="#OverviewSubmenu" class="list-group-item list-group-item-action dropdown-toggle menu-btn" data-bs-toggle="collapse">
+                    <span class="arrow"></span>
+                    &nbsp; &nbsp;
+                    <i class="fas fa-list-alt"></i> &nbsp; Overview
+                    
+                </a>
+                <div class="collapse" id="OverviewSubmenu">
+                    <a href="{{url_for('pages.overview_evening')}}" class="list-group-item list-group-item-action pl-4 submenu-btn" >&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;Evening</a>
+                    <!--a href="#" class="list-group-item list-group-item-action pl-4 submenu-btn" >&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;Evening</a-->
+                </div>
+
+                <a href="#AccountSubmenu" class="list-group-item list-group-item-action dropdown-toggle menu-btn" data-bs-toggle="collapse">
+                    <span class="arrow"></span>
+                    &nbsp; &nbsp;
+                    <i class="fas fa-user"></i>&nbsp;&nbsp; User
+                    
+                </a>
+                <div class="collapse" id="AccountSubmenu">
+                    <a href="#" class="list-group-item list-group-item-action pl-4 submenu-btn" >&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;New User</a>
+                    <a href="#" class="list-group-item list-group-item-action pl-4 submenu-btn" >&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;User List</a>
+                </div>
+                <!-- get current user name -->
+                 
+                 <a href="#" class="list-group-item menu-btn" >
+                    <i class="fas fa-user"></i> {{ current_user.email }} 
+                </a>
+                                
+            </div>
+            {% endif %}
+        </div>
+    
+    
+    <!-- Header with 3-Bar Icon -->
+    <nav class="navbar navbar-expand-sm navbar-light header-navbar" style="background-color: #F1EFEA;">
+        <div class="container-fluid">
+            <div class="navbar-container">
+                <button id="menu-toggle" class="btn" style="font-size: 1.2rem;">
+                    <i class="fas fa-bars" style="color: #000000;"></i>
+                </button>
+                <div class="sidebar-heading col-md-6">
+                    <h2 style="color: black; font-size: x-large;">SUKAN ERP</h2>
+                </div>
+            
+            {% if current_user and current_user.is_authenticated %}
+            <!-- <a class="navbar-brand" href="{{ url_for_security('logout') }}" style="color: rgb(3, 3, 3);">Logout</a> -->
+            <!-- <div class="form-group mb-0 pull-right"> -->
+                <ul class="navbar-nav ml-auto d-flex align-items-center sm-6">
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="account_settings" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="d-flex align-items-center">
+                                <span class="fa fa-user mr-2" style="color: #000000;"></span>
+                                <!-- <span><b>Account</b></span> -->
+                                <!-- <span class="fa fa-angle-down ml-2" style="color: #000000;"></span> -->
+                            </span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow border-0 custom-dropdown" aria-labelledby="account_settings">
+                            <a class="dropdown-item d-flex align-items-center" href="javascript:void(0)" id="manage_account">
+                                <i class="fa fa-cog text-primary mr-2"></i> Manage Account
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <i class="fa fa-key text-success mr-2"></i> Change Password
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center text-danger" href="{{ url_for('security.logout') }}">
+                                <i class="fa fa-power-off mr-2"></i> Logout
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item" style="margin-right: 40px;">
+                        <a data-widget="fullscreen" href="#" role="button" class="nav-link text-white">
+                            <i class="fas fa-expand-arrows-alt" style="color: #000000;"></i>
+                        </a>
+                    </li>
+                </ul>
+                
+                
+            
+            {% endif %}
+
+            <!-- /if user is admin -->
+            {% if current_user.is_admin and current_user.is_authenticated %}
+            <a class="navbar-brand" href="{{ url_for_security('logout') }}" style="color: #000000;">Logout admin</a> -->
+            {% endif %}
+        </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar and Wrapper -->
+    
+    
+        <!-- Page Content -->
+        <div id="page-content-wrapper" class="p-5 mt-30">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+
+    <!-- Footer -->
+   
+    <!-- JavaScript -->
+    <script src="{{url_for('static' ,filename='js/jquery.min.js')}}"></script>
+
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+
+
+    <!-- Sidebar Toggle Script -->
+    <script>
+        document.getElementById("menu-toggle").addEventListener("click", function () {
+            document.getElementById("wrapper").classList.toggle("toggled");
+        });
+
+        document.querySelector('a[href="create_morning"]').addEventListener('click', function (event) {
+            event.preventDefault();
+
+            const timeOfDay = confirm("Click OK for Morning, Cancel for Evening");
+            window.location.href = timeOfDay ? "/create_morning" : "/create_evening";
+        });
+
+        let lastScrollTop = 0;
+        const navbar = document.querySelector('.header-navbar');
+
+        window.addEventListener("scroll", function () {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop) {
+                // Scrolling down
+                navbar.style.top = "-60px"; // Hide the navbar (adjust height as per navbar height)
+            } else {
+                // Scrolling up
+                navbar.style.top = "0";
+            }
+            lastScrollTop = scrollTop;
+        });
+    </script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // Toggle fullscreen mode
+        document.querySelector('[data-widget="fullscreen"]').addEventListener('click', function() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else {
+                document.exitFullscreen();
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const dropdownToggle = document.querySelector(".nav-item.dropdown .nav-link");
+            const dropdownMenu = document.querySelector(".nav-item.dropdown .dropdown-menu");
+
+            // Toggle the dropdown on click
+            dropdownToggle.addEventListener("click", function(event) {
+                event.preventDefault();
+                dropdownMenu.classList.toggle("show");
+            });
+
+            // Close dropdown if clicking outside of it
+            document.addEventListener("click", function(event) {
+                if (!dropdownToggle.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                    dropdownMenu.classList.remove("show");
+                }
+            });
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            // Select the main dropdown elements
+            const mainDropdownToggle = document.querySelector(".dropdown.auth-drp .dropdown-toggle");
+            const mainDropdownMenu = document.querySelector(".dropdown.auth-drp .user-auth-dropdown");
+
+            // Toggle main dropdown menu
+            mainDropdownToggle.addEventListener("click", function(event) {
+                event.preventDefault();
+                mainDropdownMenu.classList.toggle("show");
+            });
+
+            // Close the main dropdown menu when clicking outside
+            document.addEventListener("click", function(event) {
+                if (!mainDropdownToggle.contains(event.target) && !mainDropdownMenu.contains(event.target)) {
+                    mainDropdownMenu.classList.remove("show");
+                }
+            });
+
+            // Submenu inside the dropdown for user availability
+            const subDropdownToggle = document.querySelector(".sub-menu .level-2-drp");
+            const subDropdownMenu = document.querySelector(".sub-menu .dropdown-menu");
+
+            if (subDropdownToggle && subDropdownMenu) {
+                // Toggle the availability submenu on click
+                subDropdownToggle.addEventListener("click", function(event) {
+                    event.preventDefault();
+                    subDropdownMenu.classList.toggle("show");
+                });
+
+                // Close submenu when clicking outside
+                document.addEventListener("click", function(event) {
+                    if (!subDropdownToggle.contains(event.target) && !subDropdownMenu.contains(event.target)) {
+                        subDropdownMenu.classList.remove("show");
+                    }
+                });
+            }
+        });
+
+        //sidbar hide and show
+        
+
+        
+    </script>
+
+    <!-- ####################################### -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Sidebar Toggle Script -->
+    <script>
+        
+
+        document.querySelector('a[href="create_morning"]').addEventListener('click', function (event) {
+            event.preventDefault();
+
+            const timeOfDay = confirm("Click OK for Morning, Cancel for Evening");
+            window.location.href = timeOfDay ? "/create_morning" : "/create_evening";
+        });
+
+        
+    </script>
+
+    <!-- ####################################### -->
+
+    {% block scripts %}
+    <!-- Additional scripts can be added here by child templates -->
+    {% endblock %}
+</body>
+
+
+
+
+</html>

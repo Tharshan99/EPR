@@ -1,0 +1,150 @@
+{% extends "base1.html" %}
+{% from "security/_macros.html" import render_field_with_errors, render_field, render_field_errors, render_form_errors, prop_next %}
+{% block title %}{% endblock %}
+{% block content %}
+<!-- Bootstrap 5 CSS -->
+<link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<style>
+  .login-logo {
+      padding-left: 15px;
+  }
+  .btn-long {
+      width: 100%;
+  }
+  .circle-logo {
+      width: 130px; /* Size of the logo itself */
+      height: 130px;
+      border-radius: 50%; /* Make the logo circular */
+      background-color: white;
+      border: 5px solid #e0e0e0; /* Circle border */
+      padding: 10px; /* Space around the logo inside the circle */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Optional: add shadow */
+  }
+  .form-group {
+      position: relative;
+  }
+</style>
+
+<div class="row">
+  <!-- Flash message section removed -->
+  <div class="table-struct full-width full-height">
+    <div class="table-cell vertical-align-middle auth-form-wrap">
+      <div class="auth-form ml-auto mr-auto no-float">
+        <div class="row">
+          <div class="col-sm-12 col-xs-12">
+            <div class="d-flex justify-content-center login-logo" align="center">
+              <div class="circle-logo">
+                <img 
+                  src="{{ url_for('static', filename='uploads/logo.png') }}"
+                  class="img-fluid"
+                  alt="Profile Image"
+                  style="width: 100%; height: 100%; object-fit: contain;"
+                />
+              </div>
+            </div>
+            <div class="mb-30">
+              <h3 class="text-success" align="center">Login</h3>
+            </div>
+            <div class="form-wrap">
+              <form
+                action="{{ url_for_security('login') }}{{ prop_next() }}"
+                method="post"
+                name="login_user_form"
+              >
+                {{ login_user_form.hidden_tag() }}
+                {{ render_form_errors(login_user_form) }}
+                
+                <div class="form-group">
+                  {% if "email" in identity_attributes %}
+                    {{ render_field_with_errors(login_user_form.email, class="form-control") }}
+                  {% endif %}
+                  {% if login_user_form.username and "username" in identity_attributes %}
+                    {% if "email" in identity_attributes %}
+                      <h3>{{ _fsdomain("or") }}</h3>
+                    {% endif %}
+                    {{ render_field_with_errors(login_user_form.username) }}
+                  {% endif %}
+                </div>
+
+                <div class="form-group">
+                  {{ render_field_with_errors(login_user_form.password, class="form-control", id="password") }}
+                </div>
+
+                {{ render_field_with_errors(login_user_form.remember) }}
+                {{ render_field_errors(login_user_form.csrf_token) }}
+                {{ render_field(login_user_form.submit, class="btn btn-success btn-rounded btn-long") }}
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% if security.webauthn %}
+      <hr class="fs-gap" />
+      <h2>{{ _fsdomain("Use WebAuthn to Sign In") }}</h2>
+      <div>
+        <form method="get" id="wan_signin_form" name="wan_signin_form">
+          <input
+            id="wan_signin"
+            name="wan_signin"
+            type="submit"
+            value="{{ _fsdomain('Sign in with WebAuthn') }}"
+            formaction="{{ url_for_security('wan_signin') }}{{ prop_next() }}"
+          />
+        </form>
+      </div>
+      {% endif %}
+      {% if security.oauthglue %}
+      <hr class="fs-gap" />
+      <h2>{{ _fsdomain("Use Social Oauth to Sign In") }}</h2>
+      {% for provider in security.oauthglue.provider_names %}
+      <div class="fs-gap">
+        <form method="post" id="{{ provider }}_form" name="{{ provider }}_form">
+          <input
+            id="{{ provider }}"
+            name="{{ provider }}"
+            type="submit"
+            value="{{ _fsdomain('Sign in with ')~provider }}"
+            formaction="{{ url_for_security('oauthstart', name=provider) }}{{ prop_next() }}"
+          />
+          {% if csrf_token is defined %}
+          <input
+            id="{{ provider }}_csrf_token"
+            name="{{ provider }}_csrf_token"
+            type="hidden"
+            value="{{ csrf_token() }}"
+          />
+          {% endif %}
+        </form>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var passwordField = document.getElementById("password");
+
+    // Add a double-click event listener to the password field
+    passwordField.addEventListener("dblclick", togglePasswordVisibility);
+  });
+
+  function togglePasswordVisibility() {
+    var passwordField = document.getElementById("password");
+
+    // Toggle password visibility on double-click
+    if (passwordField.type === "password") {
+        passwordField.type = "text"; // Show password
+    } else {
+        passwordField.type = "password"; // Hide password
+    }
+  }
+</script>
+{% endblock content %}

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Dashboard{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style1.css') }}">
+
+</head>
+{% block styles %}
+{% endblock %}
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-2 sidebar">
+                <a href="{{ url_for('dashboard')}}" class="{% if active_page == 'dashboard' %}active{% endif %}">Dashboard</a>
+                <a href="{{ url_for('career_dashboard')}}">Submission Dashboard</a>
+                <a href="#">Our Projects</a>
+                <a href="#">Staff</a>
+                <a href="#">Clients</a>
+                <a href="#">Settings</a>
+                <a href="{{ url_for('logout')}}">Logout</a>
+            </div>
+
+            <div id="page-content-wrapper" class="col-md-10">
+                {% block content %}
+                {% endblock %}
+            </div>
+            </div>
+            </div>
+
+            <!-- Main content -->
+            <!-- <div class="col-md-10 p-4">
+                <div class="welcome-message">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h3>Welcome back, Tharshan</h3>
+                        <div class="profile">
+                            <img src="profile.jpg" alt="Profile" class="rounded-circle" width="50">
+                            <span>Tharshan</span>
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- Stats Cards -->
+                <!-- <div class="row">
+                    <div class="col-md-3">
+                        <div class="card text-center bg-light">
+                            <div class="card-body">
+                                <h5>Total Watches</h5>
+                                <h2>890</h2>
+                                <p><span style="color: green;">+18%</span> | <span style="color: blue;">+3.8k this week</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-center bg-light">
+                            <div class="card-body">
+                                <h5>Applications</h5>
+                                <h2>60</h2>
+                                <p><span style="color: green;">+18%</span> | <span style="color: blue;">+2.8k this week</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-center bg-light">
+                            <div class="card-body">
+                                <h5>Contact</h5>
+                                <h2>34</h2>
+                                <p><span style="color: green;">+18%</span> | <span style="color: blue;">+7.8k this week</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-center bg-light">
+                            <div class="card-body">
+                                <h5>Projects</h5>
+                                <h2>7</h2>
+                                <p><span style="color: green;">+18%</span> | <span style="color: blue;">+1.2k this week</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- Charts -->
+                <!-- <div class="row chart-container">
+                    <div class="col-md-6">
+                        <h5>Watch Counts</h5>
+                        <canvas id="watchChart"></canvas>
+                    </div>
+                    <div class="col-md-6">
+                        <h5>Applications</h5>
+                        <div class="small-chart">
+                            <canvas id="applicationChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    {% block scripts %}
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+    <script>
+        // Watch Counts Line Chart
+        const watchCtx = document.getElementById('watchChart').getContext('2d');
+        new Chart(watchCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [{
+                    label: 'Watch Counts',
+                    data: [50, 60, 80, 90, 120, 150, 180, 200, 220, 230, 240, 250],
+                    borderColor: 'blue',
+                    backgroundColor: 'rgba(0, 123, 255, 0.1)',
+                    borderWidth: 2,
+                    tension: 0.4
+                }]
+            }
+        });
+
+        // Applications Pie Chart
+        const appCtx = document.getElementById('applicationChart').getContext('2d');
+        new Chart(appCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Interns', 'Students', 'Experience'],
+                datasets: [{
+                    data: [24, 60, 15],
+                    backgroundColor: ['#e74c3c', '#3498db', '#f1c40f'],
+                    hoverBackgroundColor: ['#c0392b', '#2980b9', '#f39c12']
+                }]
+            }
+        });
+    </script>
+        {% endblock %}
+</body>
+</html>
