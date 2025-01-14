@@ -15,16 +15,20 @@
 
     {% block styles %}
     <style>
+        .reply-button {
+        text-align: center;
+    }
     </style>
     {% endblock %}
 
 
 
 {% block content %}
-    <div class="container">
-        <h1>Career Dashboard</h1>
-        <table>
-            <thead>
+    <div class="container mt-4">
+        <h1 class="text-center" mb-4>Career Dashboard</h1>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+            <thead class="table-dark">
                 <tr>
                     <th>ID No</th>
                     <th>Name</th>
@@ -60,6 +64,7 @@
                 {% endfor %}
             </tbody>
         </table>
+    </div>
     </div>
     {% endblock %}
     

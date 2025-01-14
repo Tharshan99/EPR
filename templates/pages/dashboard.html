@@ -37,8 +37,8 @@
                     <div class="col-md-3">
                         <div class="card text-center bg-light">
                             <div class="card-body">
-                                <h5>Total Watches</h5>
-                                <h2>890</h2>
+                                <h5>Total Visits</h5>
+                                <h2>{{ visit_count }}</h2>
                                 <!-- <p><span style="color: green;">+18%</span> | <span style="color: blue;">+3.8k this week</span></p> -->
                             </div>
                         </div>
@@ -47,7 +47,7 @@
                         <div class="card text-center bg-light">
                             <div class="card-body">
                                 <h5>Applications</h5>
-                                <h2>60</h2>
+                                <h2>{{ total_applications }}</h2>
                                 <!-- <p><span style="color: green;">+18%</span> | <span style="color: blue;">+2.8k this week</span></p> -->
                             </div>
                         </div>
@@ -111,6 +111,10 @@
             }
         });
 
+        const studentsCount = {{ students_count }};
+        const internsCount = {{ interns_count }}
+        const experiencedCount = {{ experienced_count }}
+
         // Applications Pie Chart
         const appCtx = document.getElementById('applicationChart').getContext('2d');
         new Chart(appCtx, {
@@ -118,11 +122,23 @@
             data: {
                 labels: ['Interns', 'Students', 'Experience'],
                 datasets: [{
-                    data: [24, 60, 15],
+                    data: [studentsCount, internsCount, experiencedCount],
                     backgroundColor: ['#e74c3c', '#3498db', '#f1c40f'],
                     hoverBackgroundColor: ['#c0392b', '#2980b9', '#f39c12']
                 }]
+            },
+            options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Applications Distribution'
+                }
             }
+        }
         });
     </script>
         {% endblock %}

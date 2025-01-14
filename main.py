@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, Blueprint, send_file, abort
+from flask import Flask, render_template, request, redirect, url_for, flash, Blueprint, send_file, abort, session
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import smtplib
@@ -7,18 +7,19 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from email import encoders
 import os
-from flask_login import current_user, LoginManager, UserMixin, login_required, logout_user, login_user
+from flask_login import current_user, LoginManager, login_required, logout_user, login_user
 from werkzeug.security import generate_password_hash
 from werkzeug.security import check_password_hash
 from io import BytesIO
-
-# hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
-
-
+from flask_session import Session
+from models import db, Watch, User, Application
 from flask_security import (
     auth_required,
     current_user,
 )
+
+
+# hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
 
 pages = Blueprint('pages', __name__)
 
@@ -38,40 +39,20 @@ def load_user(user_id):
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'  # Example: SQLite database
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Disable track modifications for performance
 
-db = SQLAlchemy(app)
+app.config['SESSION_TYPE'] = 'filesystem'
+Session(app)
+
+db.init_app(app)
 
 # Update these configurations
 GMAIL_USER = 'rajahtharshan99@gmail.com'
 GMAIL_PASSWORD = 'aotn efbk qlst ebfn'
-
-# Database model
-class Application(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
-    email = db.Column(db.String(100), nullable=False)
-    category = db.Column(db.String(50), nullable=False)
-    upload_time = db.Column(db.String(50), nullable=False)
-    resume_data = db.Column(db.LargeBinary, nullable=True)  # Column to store PDF as binary data
-    resume_filename = db.Column(db.String(100), nullable=True)  # Optional: Store the file name
-
-class User(db.Model, UserMixin):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(200), nullable=False)
 
 # Create database tables
 with app.app_context():
     # db.drop_all()
     # print("All tables dropped.")
     db.create_all()
-
-
-# @app.route('/', methods=['GET'])
-# def index():
-#     if current_user.is_authenticated:
-#         return redirect(url_for('pages.dashboard'))
-#     return redirect(url_for('security.login')) #general login
 
 ##################################################### Login
 
@@ -193,7 +174,7 @@ def submit_application():
         if os.path.exists(resume_path):
             os.remove(resume_path)
 
-    return redirect('/home')
+    return redirect('/')
 
 ##################################################### Download Resume
 
@@ -228,10 +209,24 @@ def career_dashboard():
     except Exception as e:
         return f"An error occurred: {str(e)}", 500
     
+#####################################################
+    
 @app.before_request
 def before_request():
     if not current_user.is_authenticated and request.endpoint in ['dashboard']:
         flash('Please log in to access this page.', 'warning')
+
+#####################################################
+
+@app.before_request
+def track_visits():
+    if 'visited' not in session:  # Check for unique visit in this session
+        session['visited'] = True  # Mark session as visited
+        watch = Watch.query.first()
+        if watch:
+            watch.visit_count += 1
+            db.session.commit()
+
 
 ##################################################### Dashboard
 
@@ -239,10 +234,34 @@ def before_request():
 @login_required
 def dashboard():
     try:
-        # applications = Application.query.all()
-        return render_template('pages/dashboard.html')
+        # Fetch total visits from the database
+        watch = Watch.query.first()
+        visit_count = watch.visit_count if watch else 0
+        
+        # Fetch all applications
+        applications = Application.query.all()
+        # Calculate counts for categories
+        total_applications = len(applications)
+        students_count = Application.query.filter_by(category='student').count()
+        interns_count = Application.query.filter_by(category='intern').count()
+        experienced_count = Application.query.filter_by(category='experienced').count()
+        print('####################')
+        print(total_applications)
+        print(f'Students: {students_count}, Interns: {interns_count}, Experienced: {experienced_count}')
+
+        # Pass counts to the template
+        return render_template(
+            'pages/dashboard.html',
+            visit_count=visit_count,
+            applications=applications,
+            total_applications=total_applications,
+            students_count=students_count,
+            interns_count=interns_count,
+            experienced_count=experienced_count
+        )
     except Exception as e:
         return f"An error occurred: {str(e)}", 500
+
     
 ##################################################### Logout    
 
@@ -255,4 +274,7 @@ def logout():
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+    app.run(host="0.0.0.0", port=port, debug=True)
+
+# if __name__ == '__main__':
+#     app.run(debug=True)

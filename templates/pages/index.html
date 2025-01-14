@@ -34,6 +34,48 @@
   ======================================================== -->
 </head>
 
+<style>
+  .alert-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+}
+
+.alert {
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    border: 2px solid; /* Add a border */
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border-color: #000000; /* Border color for success */
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-color: #000000; /* Border color for danger */
+}
+
+.alert-info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    border-color: #000000; /* Border color for danger */
+}
+
+.alert-warning {
+    background-color: #fff3cd;
+    color: #856404;
+    border-color: #000000; /* Border color for danger */
+}
+
+</style>
+
 <body class="index-page">
 
   <header id="header" class="header d-flex align-items-center sticky-top">
@@ -99,6 +141,17 @@
   </header>
 
   <main class="main">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="alert-container">
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
 
     <!-- Hero Section -->
     <section id="hero" class="hero section dark-background">
@@ -778,6 +831,19 @@
       <!-- Template Javascript -->
       <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
+      <script>
+        // JavaScript to hide flash messages after 3 seconds
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(function () {
+                const alertContainer = document.querySelector('.alert-container');
+                if (alertContainer) {
+                    alertContainer.style.transition = 'opacity 0.5s ease-out';
+                    alertContainer.style.opacity = '0';
+                    setTimeout(() => alertContainer.remove(), 500); // Remove the element after fading out
+                }
+            }, 3000); // Hide after 3 seconds
+        });
+    </script>
 
 </body>
 
