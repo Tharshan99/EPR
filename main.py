@@ -110,6 +110,9 @@ def register():
 
 ##################################################### Submit Application
 
+# GMAIL_USER = 'rajahtharshan99@gmail.com'
+# GMAIL_PASSWORD = 'aotn efbk qlst ebfn'
+
 @app.route('/submit-application', methods=['POST'])
 def submit_application():
     name = request.form.get('name')
@@ -133,21 +136,20 @@ def submit_application():
     try:
         db.session.add(new_application)
         db.session.commit()
-        # flash('Application stored in database successfully!', 'success')
     except Exception as e:
         flash(f'Error saving application to the database: {str(e)}', 'error')
         return redirect('/home')
 
-    # Prepare email
-    subject = f"New Application for {category}"
-    body = f"Name: {name}\nEmail: {email}\nCategory: {category}"
+    # Prepare email to admin
+    subject_to_admin = f"New Application for {category}"
+    body_to_admin = f"Name: {name}\nEmail: {email}\nCategory: {category}"
 
-    message = MIMEMultipart()
-    message['From'] = GMAIL_USER
-    message['To'] = 'tharshanthamizlan@gmail.com'
-    message['Subject'] = subject
+    message_to_admin = MIMEMultipart()
+    message_to_admin['From'] = GMAIL_USER
+    message_to_admin['To'] = 'tharshanthamizlan@gmail.com'
+    message_to_admin['Subject'] = subject_to_admin
 
-    message.attach(MIMEText(body, 'plain'))
+    message_to_admin.attach(MIMEText(body_to_admin, 'plain'))
 
     # Attach the resume
     with open(resume_path, 'rb') as attachment:
@@ -158,14 +160,35 @@ def submit_application():
             'Content-Disposition',
             f'attachment; filename={resume.filename}'
         )
-        message.attach(part)
+        message_to_admin.attach(part)
 
-    # Send the email
+    # Prepare email to applicant
+    subject_to_applicant = "Thank you for your application!"
+    body_to_applicant = (
+        f"Dear {name},\n\n"
+        f"Thank you for applying for the {category} position. We have received your application and our team will review it shortly. "
+        "If your qualifications match our requirements, we will get in touch with you soon.\n\n"
+        "Best regards,\nThe Team"
+    )
+
+    message_to_applicant = MIMEMultipart()
+    message_to_applicant['From'] = GMAIL_USER
+    message_to_applicant['To'] = email
+    message_to_applicant['Subject'] = subject_to_applicant
+    message_to_applicant.attach(MIMEText(body_to_applicant, 'plain'))
+
+    # Send the emails
     try:
         with smtplib.SMTP('smtp.gmail.com', 587) as server:
             server.starttls()
             server.login(GMAIL_USER, GMAIL_PASSWORD)
-            server.sendmail(GMAIL_USER, 'tharshanthamizlan@gmail.com', message.as_string())
+
+            # Send email to admin
+            server.sendmail(GMAIL_USER, 'tharshanthamizlan@gmail.com', message_to_admin.as_string())
+
+            # Send email to applicant
+            server.sendmail(GMAIL_USER, email, message_to_applicant.as_string())
+
         flash('Application submitted successfully!', 'success')
     except Exception as e:
         flash(f'Error sending application: {str(e)}', 'error')
