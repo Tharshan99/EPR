@@ -22,8 +22,15 @@
   <link href="{{ url_for('static', filename='vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
   <link href="{{ url_for('static', filename='vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
 
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+
   <!-- Main CSS File -->
   <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
 
   <!-- =======================================================
   * Template Name: Mentor
@@ -73,6 +80,174 @@
     color: #856404;
     border-color: #000000; /* Border color for danger */
 }
+
+/* ############ */
+/*
+#calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    text-align: center;
+}
+#calendar div {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#calendar div:hover {
+    background-color: #f0f0f0;
+}
+#calendar .selected {
+    background-color: #007bff;
+    color: white;
+}
+#calendar .sunday {
+    color: red;
+    font-weight: bold;
+}
+#time-slots button {
+    margin: 5px;
+}*/
+
+/*
+#calendar-container {
+  text-align: center;
+  margin: 20px 0;
+}
+
+#calendar {
+  margin: 0 auto;
+  border-collapse: collapse;
+}
+
+#calendar th,
+#calendar td {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  vertical-align: middle;
+  border: 1px solid #ddd;
+}
+
+#calendar td {
+  cursor: pointer;
+}
+
+#calendar td:hover {
+  background-color: #f0f0f0;
+}*/
+
+
+.modalcard {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+#calendar-container {
+  text-align: center;
+  margin: 20px 0;
+  flex: 1;
+}
+
+#calendar {
+  margin: 0 auto;
+  border-collapse: collapse;
+}
+
+#calendar th,
+#calendar td {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  vertical-align: middle;
+  border: 1px solid #ddd;
+}
+
+#calendar td {
+  cursor: pointer;
+}
+
+#calendar td:hover {
+  background-color: #f0f0f0;
+}
+
+#calendar td.selected {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+}
+
+#time-container {
+  flex: 1;
+  text-align: center;
+}
+
+#selected-date {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+#time-slots {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#time-slots button {
+  margin: 5px 0;
+  padding: 10px;
+  width: 100%;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  background-color: #f8f9fa;
+  text-align: left;
+}
+
+#time-slots button:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+#time-slots button.selected {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+}
+
+/* whatsapp */
+
+.whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 20px;
+    right: 60px;
+    background-color: #25d366;
+    color: white;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    z-index: 1000;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+    background-color: #22bb5b;
+}
+
+.whatsapp-float i {
+    margin-top: 15px;
+}
+
+/* whatsapp end */
+
 
 </style>
 
@@ -555,6 +730,175 @@
   <!-- Testimonial End -->
 
 
+  <section id="contact" class="py-5" style="background-color: #f8f9fa;">
+    <div class="container">
+        <h2 class="text-center mb-4">Contact Us</h2>
+        <p class="text-center mb-5">Have questions or want to work together? Reach out to us and we’ll get back to you as soon as possible!</p>
+        
+        <div class="row">
+            <!-- Contact Form -->
+            <div class="col-md-6">
+                <form action="/submit-contact" method="POST">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email Address</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="subject" class="form-label">Subject</label>
+                        <input type="text" class="form-control" id="subject" name="subject" placeholder="Enter the subject" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Message</label>
+                        <textarea class="form-control" id="message" name="message" rows="5" placeholder="Write your message here..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Send Message</button>
+                </form>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="col-md-6">
+                <div class="card bg-light border-0 p-3">
+                    <h5 class="mb-3">Our Address</h5>
+                    <p><i class="bi bi-geo-alt"></i> 123 Main Street, Colombo 6</p><br>
+                    <h5 class="mb-3">Phone</h5>
+                    <p><i class="bi bi-telephone"></i> +94 762544297</p><br>
+                    <h5 class="mb-3">Email</h5>
+                    <p><i class="bi bi-envelope"></i> info@eprgroupers.com</p><br>
+                    <h5 class="mb-3">Follow Us</h5><br>
+                    <div class="d-flex">
+                        <a href="#" class="me-3"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="me-3"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="me-3"><i class="bi bi-linkedin"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                    </div><br>
+                  <!-- Button to Open Modal -->
+                    <div class="mt-4">
+                      <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#scheduleModal">
+                          Schedule a Call
+                      </button>
+                    </div>
+
+                    <!-- Modal Structure -->
+                    <!-- Modal for Scheduling a Call -->
+<div class="modal fade" id="scheduleModal" tabindex="-1" aria-labelledby="scheduleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="scheduleModalLabel">Schedule a Call</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <!-- Left Section -->
+          <div class="col-md-6 border-end">
+            <h4>Introductory Call</h4>
+            <p>Duration: <strong>30 minutes</strong></p>
+            <p>We have transformed hundreds of businesses worldwide with our expertise. Let's discuss how we can help your business.</p>
+            <p><strong>The meeting link will be shared via email once confirmed.</strong></p>
+          </div>
+
+          <!-- Right Section -->
+          <div class="col-md-6">
+            <h5>Select a Date & Time</h5>
+            <div id="calendar-container">
+              <h3 id="calendar-month"></h3>
+              <table id="calendar">
+                <thead>
+                  <tr>
+                    <th>Sun</th>
+                    <th>Mon</th>
+                    <th>Tue</th>
+                    <th>Wed</th>
+                    <th>Thu</th>
+                    <th>Fri</th>
+                    <th>Sat</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Calendar Dates Will Be Populated Dynamically -->
+                </tbody>
+              </table>
+            </div>
+
+            <div id="time-container">
+              <div id="time-slots">
+                <!-- Time slots will be dynamically populated here -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" id="confirm-date-time" class="btn btn-primary">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for Entering Details -->
+<div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="detailsModalLabel">Enter Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <!-- Left Section -->
+          <div class="col-md-6 border-end">
+            <h4>Introductory Call</h4>
+            <p>Duration: <strong>30 minutes</strong></p>
+            <p id="selected-date-time"></p>
+            <p>We have transformed hundreds of businesses around the world with our expertise. Let's discuss how we can help your business.</p>
+          </div>
+
+          <!-- Right Section -->
+          <div class="col-md-6">
+            <form id="details-form">
+              <div class="mb-3">
+                <label for="name" class="form-label">Name *</label>
+                <input type="text" id="name" name="name" class="form-control" required>
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email *</label>
+                <input type="email" id="email" name="email" class="form-control" required>
+              </div>
+              <div class="mb-3">
+                <label for="mobile" class="form-label">Mobile Number *</label>
+                <input type="tel" id="mobile" name="mobile" class="form-control" required>
+              </div>
+              <div class="mb-3">
+                <label for="comments" class="form-label">Please share anything that will help prepare for our meeting</label>
+                <textarea id="comments" name="comments" class="form-control"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary w-100">Schedule Event</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+    
+    
+
+
+</section>
+
+
 
     <!-- Courses Section -->
     <section id="courses" class="courses section">
@@ -727,6 +1071,13 @@
 
   </main>
 
+  <a href="https://wa.me/94753922147?text=Hello,%20I%20would%20like%20to%20know%20more%20about%20your%20services!" 
+  class="whatsapp-float" 
+  target="_blank">
+   <i class="fab fa-whatsapp"></i>
+</a>
+
+
   <footer id="footer" class="footer position-relative light-background">
 
     <div class="container footer-top">
@@ -844,6 +1195,233 @@
             }, 3000); // Hide after 3 seconds
         });
     </script>
+
+
+<script>
+  // // Helper function to get the number of days in a month
+  // function daysInMonth(month, year) {
+  //     return new Date(year, month + 1, 0).getDate();
+  // }
+
+  // // Helper function to get the day of the week
+  // function getDayOfWeek(date) {
+  //     return new Date(date).getDay();
+  // }
+
+  // // Populate the calendar dynamically for the current month
+  // function generateCalendar() {
+  //     const today = new Date();
+  //     const currentMonth = today.getMonth();
+  //     const currentYear = today.getFullYear();
+
+  //     // Display current month name
+  //     const monthNames = [
+  //         "January", "February", "March", "April", "May", "June",
+  //         "July", "August", "September", "October", "November", "December"
+  //     ];
+  //     document.getElementById("current-month").innerText = `${monthNames[currentMonth]} ${currentYear}`;
+
+  //     // Get number of days in the current month
+  //     const days = daysInMonth(currentMonth, currentYear);
+
+  //     // Get the calendar container
+  //     const calendarElement = document.getElementById("calendar");
+  //     calendarElement.innerHTML = ""; // Clear previous content
+
+  //     // Generate days
+  //     for (let day = 1; day <= days; day++) {
+  //         const date = new Date(currentYear, currentMonth, day);
+  //         const dayDiv = document.createElement("div");
+
+  //         // Set text and highlight Sundays
+  //         dayDiv.innerText = day;
+  //         if (getDayOfWeek(date) === 0) {
+  //             dayDiv.classList.add("sunday"); // Highlight Sundays in red
+  //         }
+
+  //         // Add click listener to select the day
+  //         dayDiv.addEventListener("click", function () {
+  //             document.querySelectorAll("#calendar div").forEach((el) => el.classList.remove("selected"));
+  //             dayDiv.classList.add("selected");
+  //             loadTimeSlots(); // Populate time slots for the selected date
+  //         });
+
+  //         calendarElement.appendChild(dayDiv);
+  //     }
+  // }
+
+  // // Function to load time slots
+  // function loadTimeSlots() {
+  //     const timeSlots = ["05:00", "05:30", "06:00", "06:30", "07:00", "07:30", "08:00"];
+  //     const timeSlotsContainer = document.getElementById("time-slots");
+  //     timeSlotsContainer.innerHTML = ""; // Clear previous time slots
+  //     timeSlots.forEach((slot) => {
+  //         const button = document.createElement("button");
+  //         button.className = "btn btn-outline-primary";
+  //         button.innerText = slot;
+  //         button.addEventListener("click", function () {
+  //             document.querySelectorAll("#time-slots button").forEach((btn) => btn.classList.remove("active"));
+  //             button.classList.add("active");
+  //         });
+  //         timeSlotsContainer.appendChild(button);
+  //     });
+  // }
+
+  // // Initialize the calendar
+  // generateCalendar();
+
+////////////////// Calendar
+
+document.addEventListener('DOMContentLoaded', function () {
+  const calendarBody = document.querySelector("#calendar tbody");
+  const calendarMonth = document.getElementById("calendar-month");
+  const timeSlotsElement = document.getElementById("time-slots");
+
+  // Sample time slots
+  const sampleTimeSlots = [
+    "05:00 AM", "05:30 AM", "06:00 AM", "06:30 AM",
+    "07:00 AM", "07:30 AM", "08:00 AM", "08:30 AM"
+  ];
+
+  // Generate the calendar
+  function generateCalendar(year, month) {
+    const currentDate = new Date();
+    const today = currentDate.getDate();
+    const currentMonth = currentDate.getMonth();
+    const currentYear = currentDate.getFullYear();
+
+    // Set the calendar's month and year
+    const monthNames = [
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ];
+    calendarMonth.textContent = `${monthNames[month]} ${year}`;
+
+    // Clear existing rows
+    calendarBody.innerHTML = "";
+
+    // First day of the month
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    let date = 1;
+    for (let i = 0; i < 6; i++) {
+      const row = document.createElement("tr");
+
+      for (let j = 0; j < 7; j++) {
+        const cell = document.createElement("td");
+
+        if (i === 0 && j < firstDay) {
+          // Empty cells before the first day
+          cell.textContent = "";
+        } else if (date > daysInMonth) {
+          // Empty cells after the last day
+          cell.textContent = "";
+        } else {
+          cell.textContent = date;
+
+          // Highlight today's date
+          if (year === currentYear && month === currentMonth && date === today) {
+            cell.style.fontWeight = "bold";
+          }
+
+          // Style Sundays and disable them
+          if (j === 0) { // Sunday column
+            cell.style.color = "red";
+            cell.style.pointerEvents = "none"; // Disable click
+            cell.style.backgroundColor = "#f8d7da"; // Optional: light red background for disabled Sundays
+          } else {
+            // Add click event to select date (non-Sunday)
+            cell.addEventListener("click", function () {
+              // Clear previously selected date
+              document.querySelectorAll("#calendar td").forEach(td => td.classList.remove("selected"));
+              cell.classList.add("selected");
+
+              // Show time slots only (no date)
+              showTimeSlots();
+            });
+          }
+
+          date++;
+        }
+
+        row.appendChild(cell);
+      }
+
+      calendarBody.appendChild(row);
+
+      if (date > daysInMonth) break;
+    }
+  }
+
+  // Display only time slots for the selected date
+  function showTimeSlots() {
+    // Populate time slots
+    timeSlotsElement.innerHTML = ""; // Clear existing slots
+    sampleTimeSlots.forEach(slot => {
+      const button = document.createElement("button");
+      button.textContent = slot;
+
+      // Add click event to select a time slot
+      button.addEventListener("click", function () {
+        document.querySelectorAll("#time-slots button").forEach(btn => btn.classList.remove("selected"));
+        button.classList.add("selected");
+      });
+
+      timeSlotsElement.appendChild(button);
+    });
+  }
+
+  // Initialize the calendar
+  const currentDate = new Date();
+  const currentMonth = currentDate.getMonth();
+  const currentYear = currentDate.getFullYear();
+  generateCalendar(currentYear, currentMonth);
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const confirmButton = document.getElementById("confirm-date-time");
+  const selectedDateTime = document.getElementById("selected-date-time");
+  const scheduleModal = new bootstrap.Modal(document.getElementById("scheduleModal"));
+  const detailsModal = new bootstrap.Modal(document.getElementById("detailsModal"));
+
+  let selectedDate = null;
+  let selectedTime = null;
+
+  // Populate selected date and time
+  document.getElementById("calendar").addEventListener("click", (event) => {
+    if (event.target.tagName === "TD" && event.target.textContent.trim() !== "") {
+      selectedDate = event.target.textContent.trim();
+      document.querySelectorAll("#calendar td").forEach(td => td.classList.remove("selected"));
+      event.target.classList.add("selected");
+    }
+  });
+
+  document.getElementById("time-slots").addEventListener("click", (event) => {
+    if (event.target.tagName === "BUTTON") {
+      selectedTime = event.target.textContent.trim();
+      document.querySelectorAll("#time-slots button").forEach(btn => btn.classList.remove("selected"));
+      event.target.classList.add("selected");
+    }
+  });
+
+  // Confirm button action
+  confirmButton.addEventListener("click", () => {
+    if (selectedDate && selectedTime) {
+      selectedDateTime.textContent = `Selected Date and Time: ${selectedDate}, ${selectedTime}`;
+      scheduleModal.hide();
+      detailsModal.show();
+    } else {
+      alert("Please select a date and time.");
+    }
+  });
+});
+
+
+</script>
+
+
 
 </body>
 
