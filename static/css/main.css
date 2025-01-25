@@ -315,10 +315,17 @@ h6 {
 --------------------------------------------------------------*/
 .header {
   color: var(--default-color);
-  background-color: var(--background-color);
+  background-color: transparent;
   padding: 15px 0;
   transition: all 0.5s;
   z-index: 997;
+  position: fixed; /* Ensure the header stays at the top */
+  width: 100%; /* Ensure the header spans the full width */
+}
+
+.header.scrolled {
+  background-color: white; /* Change to white background when scrolling */
+  color: black; /* Adjust text color for contrast */
 }
 
 .header .logo {
@@ -342,7 +349,7 @@ h6 {
 .header .btn-getstarted,
 .header .btn-getstarted:focus {
   color: var(--contrast-color);
-  background: var(--accent-color);
+  background: black;
   font-size: 14px;
   padding: 8px 25px;
   margin: 0 0 0 30px;
@@ -399,7 +406,7 @@ h6 {
 
   .navmenu a,
   .navmenu a:focus {
-    color: var(--nav-color);
+    color: #ffffff;
     padding: 18px 15px;
     font-size: 16px;
     font-family: var(--nav-font);
@@ -426,7 +433,7 @@ h6 {
   .navmenu li:hover>a,
   .navmenu .active,
   .navmenu .active:focus {
-    color: var(--nav-hover-color);
+    color: black;
   }
 
   .navmenu .dropdown ul {
@@ -1001,7 +1008,7 @@ section,
 --------------------------------------------------------------*/
 .hero {
   width: 100%;
-  min-height: 80vh;
+  min-height: 100vh;
   position: relative;
   padding: 80px 0;
   display: flex;
@@ -1164,7 +1171,7 @@ section,
 --------------------------------------------------------------*/
 .why-us .why-box {
   color: var(--contrast-color);
-  background: var(--accent-color);
+  background: black;
   padding: 30px;
 }
 

@@ -4,7 +4,9 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>{% block title %}EPR Groupers{% endblock %}</title>
+  <link rel="icon" href="{{ url_for('static', filename='img/titlelogo.png') }}" type="image/x-icon">
+  <title>{% block title %}EPR GROUPERS{% endblock %}</title>
+  
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -248,10 +250,67 @@
 
 /* whatsapp end */
 
+/* cookies start */
+
+.cookie-popup {
+  position: fixed;
+  bottom: 0%;
+  left: 12%;
+  transform: translateX(-50%);
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 20px;
+  width: 400px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  display: none; /* Initially hidden */
+}
+
+.button-container button {
+  margin: 5px;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#acceptAllCookies {
+  background-color: purple;
+  color: white;
+}
+
+#rejectAllCookies {
+  background-color: #555;
+  color: white;
+}
+
+#cookieSettings {
+  background-color: #ccc;
+  color: black;
+}
+
+/* cookies end */
 
 </style>
 
 <body class="index-page">
+
+<!-- cookies box -->
+<div id="cookieConsentPopup" class="cookie-popup">
+  <p>
+    By clicking "Accept All Cookies", you agree to the storing of cookies on your device to enhance site navigation, analyze site usage, and assist in our marketing efforts.
+  </p>
+  <div class="button-container">
+    <button id="acceptAllCookies">Accept All Cookies</button>
+    <button id="rejectAllCookies">Reject All</button>
+    <button id="cookieSettings">Cookies Settings</button>
+  </div>
+</div>
+
+<!-- cookies box end -->
+
 
   <header id="header" class="header d-flex align-items-center sticky-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center">
@@ -260,7 +319,7 @@
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <img src="{{ url_for('static', filename='img/logo.png') }}" alt="">
 
-        <h1 class="sitename">EPR Groupers</h1>
+        <!-- <h1 class="sitename">EPR Groupers</h1> -->
       </a>
 
       <nav id="navmenu" class="navmenu">
@@ -331,7 +390,7 @@
     <!-- Hero Section -->
     <section id="hero" class="hero section dark-background">
 
-      <img src="{{ url_for('static', filename='img/hero3.jpg') }}" alt="" data-aos="fade-in">
+      <img src="{{ url_for('static', filename='img/14.jpg') }}" alt="" data-aos="fade-in">
 
 
       <div class="container">
@@ -755,7 +814,7 @@
                         <label for="message" class="form-label">Message</label>
                         <textarea class="form-control" id="message" name="message" rows="5" placeholder="Write your message here..." required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary w-100">Send Message</button>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
                 </form>
             </div>
 
@@ -777,9 +836,9 @@
                     </div><br>
                   <!-- Button to Open Modal -->
                     <div class="mt-4">
-                      <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#scheduleModal">
-                          Schedule a Call
-                      </button>
+                      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#scheduleModal">
+                        Schedule a Call
+                      </button>                      
                     </div>
 
                     <!-- Modal Structure -->
@@ -877,6 +936,7 @@
                 <label for="comments" class="form-label">Please share anything that will help prepare for our meeting</label>
                 <textarea id="comments" name="comments" class="form-control"></textarea>
               </div>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
               <button type="submit" class="btn btn-primary w-100">Schedule Event</button>
             </form>
           </div>
@@ -1150,7 +1210,7 @@
   </footer>
 
   <!-- Scroll Top -->
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <!-- <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a> -->
 
   <!-- Preloader -->
   <div id="preloader"></div>
@@ -1198,80 +1258,85 @@
 
 
 <script>
-  // // Helper function to get the number of days in a month
-  // function daysInMonth(month, year) {
-  //     return new Date(year, month + 1, 0).getDate();
-  // }
+////////////// Scrroll
+// Select the WhatsApp icon element
+const whatsappFloat = document.querySelector('.whatsapp-float');
 
-  // // Helper function to get the day of the week
-  // function getDayOfWeek(date) {
-  //     return new Date(date).getDay();
-  // }
+// Set initial visibility state
+let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+whatsappFloat.style.display = 'none';
 
-  // // Populate the calendar dynamically for the current month
-  // function generateCalendar() {
-  //     const today = new Date();
-  //     const currentMonth = today.getMonth();
-  //     const currentYear = today.getFullYear();
+// Function to check if the hero section is visible
+function isHeroSectionVisible() {
+  const heroSection = document.getElementById('hero');
+  const heroRect = heroSection.getBoundingClientRect();
+  return heroRect.bottom > 0 && heroRect.top < window.innerHeight;
+}
 
-  //     // Display current month name
-  //     const monthNames = [
-  //         "January", "February", "March", "April", "May", "June",
-  //         "July", "August", "September", "October", "November", "December"
-  //     ];
-  //     document.getElementById("current-month").innerText = `${monthNames[currentMonth]} ${currentYear}`;
+// Listen for scroll events
+window.addEventListener('scroll', () => {
+  const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-  //     // Get number of days in the current month
-  //     const days = daysInMonth(currentMonth, currentYear);
+  // Show the WhatsApp icon when scrolling up or down, but not in the hero section
+  if (!isHeroSectionVisible()) {
+    whatsappFloat.style.display = 'block';
+  } else {
+    whatsappFloat.style.display = 'none';
+  }
 
-  //     // Get the calendar container
-  //     const calendarElement = document.getElementById("calendar");
-  //     calendarElement.innerHTML = ""; // Clear previous content
+  // Update the last scroll position
+  lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop; // Avoid negative values
 
-  //     // Generate days
-  //     for (let day = 1; day <= days; day++) {
-  //         const date = new Date(currentYear, currentMonth, day);
-  //         const dayDiv = document.createElement("div");
+  // Change navmenu li color and background when scrolling
+  const header = document.querySelector('.header');
+  const navMenuItems = document.querySelectorAll('.navmenu li a');
+  if (currentScrollTop > 0) {
+    header.style.backgroundColor = 'white';
+    navMenuItems.forEach(item => {
+      item.style.color = 'black';
+    });
+  } else {
+    header.style.backgroundColor = 'transparent';
+    navMenuItems.forEach(item => {
+      item.style.color = '#ffffff';
+    });
+  }
+});
 
-  //         // Set text and highlight Sundays
-  //         dayDiv.innerText = day;
-  //         if (getDayOfWeek(date) === 0) {
-  //             dayDiv.classList.add("sunday"); // Highlight Sundays in red
-  //         }
 
-  //         // Add click listener to select the day
-  //         dayDiv.addEventListener("click", function () {
-  //             document.querySelectorAll("#calendar div").forEach((el) => el.classList.remove("selected"));
-  //             dayDiv.classList.add("selected");
-  //             loadTimeSlots(); // Populate time slots for the selected date
-  //         });
 
-  //         calendarElement.appendChild(dayDiv);
-  //     }
-  // }
+//////////// Cookies start
 
-  // // Function to load time slots
-  // function loadTimeSlots() {
-  //     const timeSlots = ["05:00", "05:30", "06:00", "06:30", "07:00", "07:30", "08:00"];
-  //     const timeSlotsContainer = document.getElementById("time-slots");
-  //     timeSlotsContainer.innerHTML = ""; // Clear previous time slots
-  //     timeSlots.forEach((slot) => {
-  //         const button = document.createElement("button");
-  //         button.className = "btn btn-outline-primary";
-  //         button.innerText = slot;
-  //         button.addEventListener("click", function () {
-  //             document.querySelectorAll("#time-slots button").forEach((btn) => btn.classList.remove("active"));
-  //             button.classList.add("active");
-  //         });
-  //         timeSlotsContainer.appendChild(button);
-  //     });
-  // }
+document.addEventListener("DOMContentLoaded", function () {
+  // Check if the cookie consent has already been given
+  if (!localStorage.getItem("cookieConsent")) {
+    // Show the popup if consent is not set
+    const cookiePopup = document.getElementById("cookieConsentPopup");
+    cookiePopup.style.display = "block";
 
-  // // Initialize the calendar
-  // generateCalendar();
+    // Add event listeners for buttons
+    document.getElementById("acceptAllCookies").addEventListener("click", function () {
+      localStorage.setItem("cookieConsent", "accepted");
+      cookiePopup.style.display = "none";
+    });
+
+    document.getElementById("rejectAllCookies").addEventListener("click", function () {
+      localStorage.setItem("cookieConsent", "rejected");
+      cookiePopup.style.display = "none";
+    });
+
+    document.getElementById("cookieSettings").addEventListener("click", function () {
+      alert("Open cookie settings modal (implement this)");
+    });
+  }
+});
+
+
+
+
+//////////// cookies End
 
 ////////////////// Calendar
-
 document.addEventListener('DOMContentLoaded', function () {
   const calendarBody = document.querySelector("#calendar tbody");
   const calendarMonth = document.getElementById("calendar-month");
@@ -1361,6 +1426,7 @@ document.addEventListener('DOMContentLoaded', function () {
     sampleTimeSlots.forEach(slot => {
       const button = document.createElement("button");
       button.textContent = slot;
+      button.classList.add("btn", "btn-outline-primary", "m-2");
 
       // Add click event to select a time slot
       button.addEventListener("click", function () {
@@ -1379,6 +1445,7 @@ document.addEventListener('DOMContentLoaded', function () {
   generateCalendar(currentYear, currentMonth);
 });
 
+// Modal Management
 
 document.addEventListener("DOMContentLoaded", function () {
   const confirmButton = document.getElementById("confirm-date-time");
@@ -1389,7 +1456,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let selectedDate = null;
   let selectedTime = null;
 
-  // Populate selected date and time
+  // Event listener for calendar date selection
   document.getElementById("calendar").addEventListener("click", (event) => {
     if (event.target.tagName === "TD" && event.target.textContent.trim() !== "") {
       selectedDate = event.target.textContent.trim();
@@ -1398,6 +1465,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  // Event listener for time slot selection
   document.getElementById("time-slots").addEventListener("click", (event) => {
     if (event.target.tagName === "BUTTON") {
       selectedTime = event.target.textContent.trim();
@@ -1414,6 +1482,38 @@ document.addEventListener("DOMContentLoaded", function () {
       detailsModal.show();
     } else {
       alert("Please select a date and time.");
+    }
+  });
+
+  // Close both modals when the close button in the second modal is clicked
+  const detailsCloseButton = document.querySelector("#detailsModal .btn-close");
+  detailsCloseButton.addEventListener("click", () => {
+    scheduleModal.hide();
+    detailsModal.hide();
+
+    // Manually remove the modal backdrop
+    document.querySelectorAll(".modal-backdrop").forEach(backdrop => backdrop.remove());
+
+    // Remove the 'modal-open' class from the body to make the page clickable again
+    document.body.classList.remove("modal-open");
+    document.body.style.overflow = "auto"; // Reset the overflow property
+  });
+});
+
+
+document.querySelectorAll('.btn-close').forEach((closeButton) => {
+  closeButton.addEventListener('click', () => {
+    // Close both modals
+    const scheduleModal = document.getElementById('scheduleModal');
+    const detailsModal = document.getElementById('detailsModal');
+    const bootstrapModal = bootstrap.Modal; // Bootstrap Modal class reference
+
+    if (scheduleModal && bootstrapModal.getInstance(scheduleModal)) {
+      bootstrapModal.getInstance(scheduleModal).hide();
+    }
+
+    if (detailsModal && bootstrapModal.getInstance(detailsModal)) {
+      bootstrapModal.getInstance(detailsModal).hide();
     }
   });
 });
