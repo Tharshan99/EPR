@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <link rel="icon" href="{{ url_for('static', filename='img/titlelogo.png') }}" type="image/x-icon">
+  <link rel="icon" href="{{ url_for('static', filename='img/title.png') }}" type="image/x-icon">
   <title>{% block title %}EPR GROUPERS{% endblock %}</title>
   
   <meta name="description" content="">
@@ -327,7 +327,7 @@
           <li><a href="index.html" class="active">Home<br></a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="courses.html">Services</a></li>
-          <li class="dropdown"><a href="#"><span>Product</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+          <!-- <li class="dropdown"><a href="#"><span>Product</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="#">Dropdown 1</a></li>
               <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
@@ -343,7 +343,7 @@
               <li><a href="#">Dropdown 3</a></li>
               <li><a href="#">Dropdown 4</a></li>
             </ul>
-          </li>
+          </li> -->
           <li><a href="events.html">About Us</a></li>
           <li><a href="pricing.html">Contact</a></li>
           <li><a href="{{ url_for('career_page')}}">Careers</a></li>
@@ -369,7 +369,7 @@
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
-      <a class="btn-getstarted" href="{{ url_for('login') }}">Login</a>
+      <!-- <a class="btn-getstarted" href="{{ url_for('login') }}">Login</a> -->
 
     </div>
   </header>
@@ -390,7 +390,7 @@
     <!-- Hero Section -->
     <section id="hero" class="hero section dark-background">
 
-      <img src="{{ url_for('static', filename='img/13.jpg') }}" alt="" data-aos="fade-in">
+      <img src="{{ url_for('static', filename='img/16.jpg') }}" alt="" data-aos="fade-in">
 
 
       <div class="container">
@@ -1288,17 +1288,33 @@ window.addEventListener('scroll', () => {
   lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop; // Avoid negative values
 
   // Change navmenu li color and background when scrolling
-  const header = document.querySelector('.header');
+  const navMenu = document.querySelector('.header');
   const navMenuItems = document.querySelectorAll('.navmenu li a');
   if (currentScrollTop > 0) {
-    header.style.backgroundColor = 'white';
+    navMenu.style.backgroundColor = 'white';
     navMenuItems.forEach(item => {
       item.style.color = 'black';
+
+      // Add hover effect for nav menu items
+      item.addEventListener('mouseenter', () => {
+        item.style.color = '#007bff'; // Example hover color
+      });
+      item.addEventListener('mouseleave', () => {
+        item.style.color = 'black'; // Reset color after hover
+      });
     });
   } else {
-    header.style.backgroundColor = 'transparent';
+    navMenu.style.backgroundColor = 'transparent';
     navMenuItems.forEach(item => {
       item.style.color = '#ffffff';
+
+      // Reset hover effect for nav menu items
+      item.addEventListener('mouseenter', () => {
+        item.style.color = '#007bff'; // Example hover color
+      });
+      item.addEventListener('mouseleave', () => {
+        item.style.color = '#ffffff'; // Reset color after hover
+      });
     });
   }
 });

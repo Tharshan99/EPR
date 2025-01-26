@@ -45,7 +45,8 @@
 }
 
 .dark-background {
-  --background-color: #060606;
+  /* --background-color: #060606; */
+  --background-color: #9220be;
   --default-color: #ffffff;
   --heading-color: #ffffff;
   --surface-color: #252525;
@@ -333,8 +334,9 @@ h6 {
 }
 
 .header .logo img {
-  max-height: 36px;
+  max-height: 70px;
   margin-right: 8px;
+  color: white;
 }
 
 .header .logo h1 {
@@ -433,7 +435,7 @@ h6 {
   .navmenu li:hover>a,
   .navmenu .active,
   .navmenu .active:focus {
-    color: black;
+    color: #007bff;
   }
 
   .navmenu .dropdown ul {
