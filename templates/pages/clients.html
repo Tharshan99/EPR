@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clients are Saying</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f4f8;
+        }
+        .testimonial-section {
+            width: 30%;
+            max-width: 800px;
+            overflow: hidden;
+            position: relative;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        .testimonial-slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .testimonial-card {
+            min-width: 100%;
+            background: #fff;
+            border-radius: 15px;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .testimonial-card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .testimonial-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #007bff;
+        }
+        .testimonial-card p {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 15px;
+        }
+        .testimonial-card span {
+            font-weight: bold;
+            color: #333;
+        }
+        .controls {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 20px;
+        }
+        .controls button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 1rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+        .controls button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <!-- <div class="testimonial-section">
+        <div class="testimonial-slider" id="slider"> -->
+            <div class="testimonial-card">
+                <img src="../../static/img/client1.jpg" alt="John Doe">
+                <h3>"Amazing service!"</h3>
+                <p>"They provided top-notch support and ensured all our needs were met."</p>
+                <span>- John Doe</span>
+            </div>
+            <div class="testimonial-card">
+                <img src="../../static/img/client1.jpg" alt="Jane Smith">
+                <h3>"Highly recommend!"</h3>
+                <p>"The team is incredibly professional and delivered great results."</p>
+                <span>- Jane Smith</span>
+            </div>
+            <div class="testimonial-card">
+                <img src="../../static/img/client1.jpg" alt="Sarah Lee">
+                <h3>"Outstanding experience!"</h3>
+                <p>"I loved working with them. They exceeded all my expectations."</p>
+                <span>- Sarah Lee</span>
+            </div>
+            <div class="testimonial-card">
+                <img src="../../static/img/client1.jpg" alt="John Doe">
+                <h3>"Amazing service!"</h3>
+                <p>"samle testimonial2."</p>
+                <span>- John Doe</span>
+            </div>
+            <div class="testimonial-card">
+                <img src="../../static/img/client1.jpg" alt="John Doe">
+                <h3>"Amazing service!"</h3>
+                <p>"samle testimonial3."</p>
+                <span>- John Doe</span>
+            </div>
+            <div class="testimonial-card">
+                <img src="../../static/img/client1.jpg" alt="John Doe">
+                <h3>"Amazing service!"</h3>
+                <p>"samle testimonial4."</p>
+                <span>- John Doe</span>
+            </div>
+            <div class="testimonial-card">
+                <img src="../../static/img/client1.jpg" alt="John Doe">
+                <h3>"Amazing service!"</h3>
+                <p>"samle testimonial5."</p>
+                <span>- John Doe</span>
+            </div>
+        </div>
+        <div class="controls">
+            <button id="prev">Previous</button>
+            <button id="next">Next</button>
+        </div>
+    </div>
+<!-- 
+    <script>
+        const slider = document.getElementById('slider');
+        const prevBtn = document.getElementById('prev');
+        const nextBtn = document.getElementById('next');
+        const cards = document.querySelectorAll('.testimonial-card');
+        let currentIndex = 0;
+
+        function updateSlider() {
+            slider.style.transform = `translateX(-${currentIndex * 105}%)`;
+        }
+
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % cards.length;
+            updateSlider();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+            updateSlider();
+        });
+
+        // Auto rotate every 5 seconds
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % cards.length;
+            updateSlider();
+        }, 5000);
+    </script> -->
+</body>
+</html>

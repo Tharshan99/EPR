@@ -285,6 +285,12 @@ def dashboard():
     except Exception as e:
         return f"An error occurred: {str(e)}", 500
 
+##################################################### Create POST    
+
+@app.route('/create_post')
+@login_required
+def create_post():
+    return render_template('pages/create_post.html')
     
 ##################################################### Logout    
 

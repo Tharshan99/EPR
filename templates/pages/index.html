@@ -25,6 +25,7 @@
   <link href="{{ url_for('static', filename='vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
 
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
 
 
   <!-- Main CSS File -->
@@ -33,14 +34,6 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
-
-  <!-- =======================================================
-  * Template Name: Mentor
-  * Template URL: https://bootstrapmade.com/mentor-free-education-bootstrap-theme/
-  * Updated: Aug 07 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <style>
@@ -82,64 +75,6 @@
     color: #856404;
     border-color: #000000; /* Border color for danger */
 }
-
-/* ############ */
-/*
-#calendar {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 5px;
-    text-align: center;
-}
-#calendar div {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    cursor: pointer;
-}
-#calendar div:hover {
-    background-color: #f0f0f0;
-}
-#calendar .selected {
-    background-color: #007bff;
-    color: white;
-}
-#calendar .sunday {
-    color: red;
-    font-weight: bold;
-}
-#time-slots button {
-    margin: 5px;
-}*/
-
-/*
-#calendar-container {
-  text-align: center;
-  margin: 20px 0;
-}
-
-#calendar {
-  margin: 0 auto;
-  border-collapse: collapse;
-}
-
-#calendar th,
-#calendar td {
-  width: 40px;
-  height: 40px;
-  text-align: center;
-  vertical-align: middle;
-  border: 1px solid #ddd;
-}
-
-#calendar td {
-  cursor: pointer;
-}
-
-#calendar td:hover {
-  background-color: #f0f0f0;
-}*/
-
 
 .modalcard {
   display: flex;
@@ -293,6 +228,144 @@
 
 /* cookies end */
 
+/* testimonial */
+
+.testimonial-item {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.testimonial-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+/* testimonial end */
+
+/* style for contact us */
+/* Hover Effects */
+.bg-white {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.bg-white:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Icon Styling */
+.icon {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Button Styling */
+.btn-outline-primary {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--bs-primary);
+  color: white;
+}
+
+/* contact us end */
+
+/* Our services */
+/* Service Item Hover Effect */
+.service-item {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Icon Styling */
+.icon {
+  margin-bottom: 1rem;
+}
+
+/* Button Styling */
+.btn-outline-primary {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--bs-primary);
+  color: white;
+}
+
+/* Our services end */
+
+/* footer */
+
+/* Footer Styling */
+/* General Footer Styling */
+.footer-links h4 {
+    color: #00aaff !important;
+    font-size: 18px !important;
+    font-weight: bold !important;
+    margin-bottom: 15px !important;
+  }
+
+  .footer-links ul {
+    list-style: none !important;
+    padding: 0 !important;
+  }
+
+  .footer-links ul li {
+    margin-bottom: 10px !important;
+  }
+
+  .footer-links ul li a {
+    color: #ddd !important;
+    text-decoration: none !important;
+    transition: 0.3s !important;
+  }
+
+  .footer-links ul li a:hover {
+    color: #00aaff !important;
+  }
+
+  /* Social Icons */
+  .social-links {
+    display: flex !important;
+    gap: 10px !important;
+  }
+
+  .social-icon {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 40px !important;
+    height: 40px !important;
+    background: #111 !important;
+    border-radius: 50% !important;
+    font-size: 18px !important;
+    transition: 0.3s !important;
+    color: #ddd !important;
+    text-decoration: none !important;
+  }
+
+  .social-icon:hover {
+    background: #00aaff !important;
+    color: #fff !important;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .footer-about, .footer-links {
+      text-align: center !important;
+    }
+    
+    .social-links {
+      justify-content: center !important;
+    }
+  }
+
 </style>
 
 <body class="index-page">
@@ -308,7 +381,6 @@
     <button id="cookieSettings">Cookies Settings</button>
   </div>
 </div>
-
 <!-- cookies box end -->
 
 
@@ -403,80 +475,6 @@
 
     </section><!-- /Hero Section -->
 
-    <!-- Services Section -->
-    <section id="services" class="services section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Our Services</h2>
-        <p>EPR EPREPREPREPREPREPR</p>
-      </div><!-- End Section Title -->
-
-      <div class="container">
-
-        <div class="row gy-4">
-
-          <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="100">
-            <div class="icon flex-shrink-0"><i class="bi bi-briefcase" style="color: #f57813;"></i></div>
-            <div>
-              <h4 class="title">AI Soutions</h4>
-              <p class="description">Transform your business with cutting-edge AI solutions that enhance efficiency, automate processes, and drive innovation</p>
-              <a href="#" class="readmore stretched-link"><span>Learn More</span><i class="bi bi-arrow-right"></i></a>
-            </div>
-          </div>
-          <!-- End Service Item -->
-
-          <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="200">
-            <div class="icon flex-shrink-0"><i class="bi bi-card-checklist" style="color: #15a04a;"></i></div>
-            <div>
-              <h4 class="title">Intelligent Data Analysis</h4>
-              <p class="description">Unlock insights and drive decisions with intelligent data analysis powered by AI</p>
-              <a href="#" class="readmore stretched-link"><span>Learn More</span><i class="bi bi-arrow-right"></i></a>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="300">
-            <div class="icon flex-shrink-0"><i class="bi bi-bar-chart" style="color: #d90769;"></i></div>
-            <div>
-              <h4 class="title">Web Development</h4>
-              <p class="description">Crafting dynamic, responsive, and user-friendly websites to elevate your online presence</p>
-              <a href="#" class="readmore stretched-link"><span>Learn More</span><i class="bi bi-arrow-right"></i></a>
-            </div>
-          </div><!-- End Service Item -->
-          <br><br>
-          <div class="col-lg-4 col-md-6 service-item d-flex style='margin-top: 20px;'" data-aos="fade-up" data-aos-delay="400">
-            <div class="icon flex-shrink-0"><i class="bi bi-binoculars" style="color: #15bfbc;"></i></div>
-            <div>
-              <h4 class="title">IoT (Internet of Things) Solutions</h4>
-              <p class="description">Design and implement IoT systems for industries like manufacturing, agriculture, and smart homes. Offer services ranging from device integration to real-time monitoring and analytics.</p>
-              <a href="#" class="readmore stretched-link"><span>Learn More</span><i class="bi bi-arrow-right"></i></a>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="500">
-            <div class="icon flex-shrink-0"><i class="bi bi-brightness-high" style="color: #f5cf13;"></i></div>
-            <div>
-              <h4 class="title">Mobile Applications</h4>
-              <p class="description">Designing seamless, innovative, and user-centric mobile applications for all platforms</p>
-              <a href="#" class="readmore stretched-link"><span>Learn More</span><i class="bi bi-arrow-right"></i></a>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="600">
-            <div class="icon flex-shrink-0"><i class="bi bi-calendar4-week" style="color: #1335f5;"></i></div>
-            <div>
-              <h4 class="title">Digital Marketing</h4>
-              <p class="description">Boost your brand with strategic digital marketing solutions that drive engagement and growth AI</p>
-              <a href="#" class="readmore stretched-link"><span>Learn More</span><i class="bi bi-arrow-right"></i></a>
-            </div>
-          </div><!-- End Service Item -->
-
-        </div>
-
-      </div>
-
-    </section><!-- /Services Section -->
-
     <!-- About Section -->
     <section id="about" class="about section">
 
@@ -485,7 +483,7 @@
         <div class="row gy-4">
 
           <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-up" data-aos-delay="100">
-            <img src="{{ url_for('static', filename='img/about.jpg') }}" alt="">
+            <img src="{{ url_for('static', filename='img/about3.jpg') }}" alt="">
           </div>
 
           <div class="col-lg-6 order-2 order-lg-1 content" data-aos="fade-up" data-aos-delay="200">
@@ -517,48 +515,88 @@
 
       </div>
 
-    </section><!-- /About Section -->
+    </section>
+    <!-- /About Section -->
 
-    <!-- Counts Section -->
-    <!-- <section id="counts" class="section counts light-background">
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <!-- Services Section -->
+    <section id="services" class="services section py-5" style="background-color: #f8f9fa;">
+      <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+          <h4 class="text-primary">What We Offer</h4>
+          <h2 class="display-4 mb-4">Our Services</h2>
+          <p class="lead">We provide innovative solutions to help your business grow and thrive in the digital age.</p>
+        </div>
 
         <div class="row gy-4">
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-item bg-white rounded p-4 text-center shadow">
+              <div class="icon mb-4">
+                <i class="fas fa-robot fa-3x text-primary"></i>
+              </div>
+              <h4 class="mb-3">AI Solutions</h4>
+              <p class="mb-4">Transform your business with cutting-edge AI solutions that enhance efficiency, automate processes, and drive innovation.</p>
+              <a href="#" class="btn btn-outline-primary">Learn More <i class="fas fa-arrow-right ms-2"></i></a>
+            </div>
+          </div>
 
-          <div class="col-lg-3 col-md-6">
-            <div class="stats-item text-center w-100 h-100">
-              <span data-purecounter-start="0" data-purecounter-end="1232" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Students</p>
-            </div> -->
-          <!-- </div>End Stats Item -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-item bg-white rounded p-4 text-center shadow">
+              <div class="icon mb-4">
+                <i class="fas fa-chart-line fa-3x text-primary"></i>
+              </div>
+              <h4 class="mb-3">Intelligent Data Analysis</h4>
+              <p class="mb-4">Unlock insights and drive decisions with intelligent data analysis powered by AI.</p>
+              <a href="#" class="btn btn-outline-primary">Learn More <i class="fas fa-arrow-right ms-2"></i></a>
+            </div>
+          </div>
 
-          <!-- <div class="col-lg-3 col-md-6">
-            <div class="stats-item text-center w-100 h-100">
-              <span data-purecounter-start="0" data-purecounter-end="64" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Courses</p>
-            </div> -->
-          <!-- </div>End Stats Item -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="service-item bg-white rounded p-4 text-center shadow">
+              <div class="icon mb-4">
+                <i class="fas fa-code fa-3x text-primary"></i>
+              </div>
+              <h4 class="mb-3">Web Development</h4>
+              <p class="mb-4">Crafting dynamic, responsive, and user-friendly websites to elevate your online presence.</p>
+              <a href="#" class="btn btn-outline-primary">Learn More <i class="fas fa-arrow-right ms-2"></i></a>
+            </div>
+          </div>
 
-          <!-- <div class="col-lg-3 col-md-6">
-            <div class="stats-item text-center w-100 h-100">
-              <span data-purecounter-start="0" data-purecounter-end="42" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Events</p>
-            </div> -->
-          <!-- </div>End Stats Item -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="service-item bg-white rounded p-4 text-center shadow">
+              <div class="icon mb-4">
+                <i class="fas fa-network-wired fa-3x text-primary"></i>
+              </div>
+              <h4 class="mb-3">IoT Solutions</h4>
+              <p class="mb-4">Design and implement IoT systems for industries like manufacturing, agriculture, and smart homes.</p>
+              <a href="#" class="btn btn-outline-primary">Learn More <i class="fas fa-arrow-right ms-2"></i></a>
+            </div>
+          </div>
 
-          <!-- <div class="col-lg-3 col-md-6">
-            <div class="stats-item text-center w-100 h-100">
-              <span data-purecounter-start="0" data-purecounter-end="24" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Trainers</p>
-            </div> -->
-          <!-- </div>End Stats Item -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+            <div class="service-item bg-white rounded p-4 text-center shadow">
+              <div class="icon mb-4">
+                <i class="fas fa-mobile-alt fa-3x text-primary"></i>
+              </div>
+              <h4 class="mb-3">Mobile Applications</h4>
+              <p class="mb-4">Designing seamless, innovative, and user-centric mobile applications for all platforms.</p>
+              <a href="#" class="btn btn-outline-primary">Learn More <i class="fas fa-arrow-right ms-2"></i></a>
+            </div>
+          </div>
 
-        <!-- </div> -->
-
-      <!-- </div> -->
-
-    <!-- </section>/Counts Section -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+            <div class="service-item bg-white rounded p-4 text-center shadow">
+              <div class="icon mb-4">
+                <i class="fas fa-bullhorn fa-3x text-primary"></i>
+              </div>
+              <h4 class="mb-3">Digital Marketing</h4>
+              <p class="mb-4">Boost your brand with strategic digital marketing solutions that drive engagement and growth.</p>
+              <a href="#" class="btn btn-outline-primary">Learn More <i class="fas fa-arrow-right ms-2"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- /Services Section -->
 
     <!-- Why Us Section -->
     <section id="why-us" class="section why-us">
@@ -716,133 +754,244 @@
 
     </section><!-- /Features Section -->
 
-    <!-- Testimonial Start -->
-    <div class="container-fluid testimonial bg-light py-5">
-      <div class="container py-5">
-          <div class="row g-4 align-items-center">
-              <div class="col-xl-4 wow fadeInLeft" data-wow-delay="0.1s">
-                  <div class="h-100 rounded">
-                      <h4 class="text-primary">Our Feedbacks </h4>
-                      <h1 class="display-4 mb-4">Clients are Talking</h1>
-                      <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum atque soluta unde itaque. Consequatur quam odit blanditiis harum veritatis porro.</p>
-                      <a class="btn btn-primary rounded-pill text-white py-3 px-5" href="#">Read All Reviews <i class="fas fa-arrow-right ms-2"></i></a>
+<!-- Testimonial Start -->
+<div class="container-fluid testimonial py-5" style="background-color: #f8f9fa;">
+  <div class="container py-5">
+      <div class="text-center mb-5">
+          <h4 class="text-primary">What Our Clients Say</h4>
+          <h1 class="display-4 mb-4">Client Testimonials</h1>
+          <p class="lead">Hear from our satisfied clients about their experiences with us.</p>
+      </div>
+      <div class="row g-4">
+          <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+              <div class="testimonial-item bg-white rounded p-4">
+                  <div class="d-flex align-items-center mb-4">
+                      <img src="{{ url_for('static', filename='img/testimonials/client2.jpg') }}" class="rounded-circle me-3" style="width: 60px; height: 60px;" alt="">
+                      <div>
+                          <h5 class="mb-0">John Doe</h5>
+                          <p class="text-muted mb-0">CEO, Company A</p>
+                      </div>
+                  </div>
+                  <p class="mb-4">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</p>
+                  <div class="d-flex justify-content-end">
+                      <i class="fas fa-quote-right fa-2x text-primary text-black"></i>
                   </div>
               </div>
-              <div class="col-xl-8">
-                  <div class="testimonial-carousel owl-carousel wow fadeInUp" data-wow-delay="0.1s">
-                      <div class="testimonial-item bg-white rounded p-4 wow fadeInUp" data-wow-delay="0.3s">
-                          <div class="d-flex">
-                              <div><i class="fas fa-quote-left fa-3x text-dark me-3"></i></div>
-                              <p class="mt-4">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam eos impedit eveniet dolorem culpa ullam incidunt vero quo recusandae nemo? Molestiae doloribus iure,
-                              </p>
-                          </div>
-                          <div class="d-flex justify-content-end">
-                              <div class="my-auto text-end">
-                                  <h5>Person Name</h5>
-                                  <p class="mb-0">Profession</p>
-                              </div>
-                              <div class="bg-white rounded-circle ms-3">
-                                  <img src="{{ url_for('static', filename='img/testimonials/testimonials-1.jpg') }}" class="rounded-circle p-2" style="width: 80px; height: 80px; border: 1px solid; border-color: var(--bs-primary);" alt="">
-                              </div>
-                          </div>
+          </div>
+          <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+              <div class="testimonial-item bg-white rounded p-4">
+                  <div class="d-flex align-items-center mb-4">
+                      <img src="{{ url_for('static', filename='img/kalam.jpg') }}" class="rounded-circle me-3" style="width: 60px; height: 60px;" alt="">
+                      <div>
+                          <h5 class="mb-0">Abdul Kalam</h5>
+                          <p class="text-muted mb-0">Marketing Director, Company B</p>
                       </div>
-                      <div class="testimonial-item bg-white rounded p-4 wow fadeInUp" data-wow-delay="0.5s">
-                          <div class="d-flex">
-                              <div><i class="fas fa-quote-left fa-3x text-dark me-3"></i></div>
-                              <p class="mt-4">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam eos impedit eveniet dolorem culpa ullam incidunt vero quo recusandae nemo? Molestiae doloribus iure,
-                              </p>
-                          </div>
-                          <div class="d-flex justify-content-end">
-                              <div class="my-auto text-end">
-                                  <h5>Person Name</h5>
-                                  <p class="mb-0">Profession</p>
-                              </div>
-                              <div class="bg-white rounded-circle ms-3">
-                                  <img src="{{ url_for('static', filename='img/testimonials/testimonials-2.jpg') }}" class="rounded-circle p-2" style="width: 80px; height: 80px; border: 1px solid; border-color: var(--bs-primary);" alt="">
-                              </div>
-                          </div>
+                  </div>
+                  <p class="mb-4">"Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."</p>
+                  <div class="d-flex justify-content-end">
+                      <i class="fas fa-quote-right fa-2x text-primary text-black"></i>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+              <div class="testimonial-item bg-white rounded p-4">
+                  <div class="d-flex align-items-center mb-4">
+                      <img src="{{ url_for('static', filename='img/billgates.jpg') }}" class="rounded-circle me-3" style="width: 60px; height: 60px;" alt="">
+                      <div>
+                          <h5 class="mb-0">Billgates</h5>
+                          <p class="text-muted mb-0">CTO, Company C</p>
                       </div>
-                      <div class="testimonial-item bg-white rounded p-4 wow fadeInUp" data-wow-delay="0.7s">
-                          <div class="d-flex">
-                              <div><i class="fas fa-quote-left fa-3x text-dark me-3"></i></div>
-                              <p class="mt-4">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam eos impedit eveniet dolorem culpa ullam incidunt vero quo recusandae nemo? Molestiae doloribus iure,
-                              </p>
-                          </div>
-                          <div class="d-flex justify-content-end">
-                              <div class="my-auto text-end">
-                                  <h5>Person Name</h5>
-                                  <p class="mb-0">Profession</p>
-                              </div>
-                              <div class="bg-white rounded-circle ms-3">
-                                <img src="{{ url_for('static', filename='img/testimonials/testimonials-3.jpg') }}" 
-                                class="rounded-circle p-2" 
-                                style="width: 80px; height: 80px; border: 1px solid; border-color: var(--bs-primary);" 
-                                alt="">
-                              </div>
-                          </div>
-                      </div>
+                  </div>
+                  <p class="mb-4">"Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."</p>
+                  <div class="d-flex justify-content-end">
+                      <i class="fas fa-quote-right fa-2x text-primary text-black"></i>
                   </div>
               </div>
           </div>
       </div>
   </div>
-  <!-- Testimonial End -->
+</div>
+<!-- Testimonial End -->
 
 
-  <section id="contact" class="py-5" style="background-color: #f8f9fa;">
-    <div class="container">
-        <h2 class="text-center mb-4">Contact Us</h2>
-        <p class="text-center mb-5">Have questions or want to work together? Reach out to us and we’ll get back to you as soon as possible!</p>
-        
-        <div class="row">
-            <!-- Contact Form -->
-            <div class="col-md-6">
-                <form action="/submit-contact" method="POST">
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Full Name</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email Address</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="subject" class="form-label">Subject</label>
-                        <input type="text" class="form-control" id="subject" name="subject" placeholder="Enter the subject" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="message" class="form-label">Message</label>
-                        <textarea class="form-control" id="message" name="message" rows="5" placeholder="Write your message here..." required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Send Message</button>
-                </form>
+
+<!-- Recent Projects Section Start -->
+<section id="projects" class="py-5">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h4 class="text-primary">Our Work</h4>
+      <h1 class="display-4 mb-4">Recent Projects</h1>
+    </div>
+    <div class="row g-4">
+      <div class="col-lg-4 col-md-6">
+        <div class="card shadow-sm">
+          <img src="{{ url_for('static', filename='img/projects/project1.jpg') }}" class="card-img-top" alt="Project 1">
+          <div class="card-body">
+            <h5 class="card-title">Project One</h5>
+            <p class="card-text">A brief description of the project goes here.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="card shadow-sm">
+          <img src="{{ url_for('static', filename='img/projects/project2.jpg') }}" class="card-img-top" alt="Project 2">
+          <div class="card-body">
+            <h5 class="card-title">Project Two</h5>
+            <p class="card-text">A brief description of the project goes here.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="card shadow-sm">
+          <img src="{{ url_for('static', filename='img/projects/project3.jpg') }}" class="card-img-top" alt="Project 3">
+          <div class="card-body">
+            <h5 class="card-title">Project Three</h5>
+            <p class="card-text">A brief description of the project goes here.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Recent Projects Section End -->
+
+<!-- Our Team Section Start -->
+<section id="team" class="py-5 bg-light">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h4 class="text-primary">Meet Our Team</h4>
+      <h1 class="display-4 mb-4">Our Dedicated Professionals</h1>
+    </div>
+    <div class="row g-4">
+      <div class="col-lg-4 col-md-6 mx-auto">
+        <div class="card shadow-sm text-center w-75 mx-auto">
+          <img src="{{ url_for('static', filename='img/member3.jpeg') }}" class="card-img-top img-fluid w-75 mx-auto mt-3 rounded" alt="Team Member 1">
+          <div class="card-body">
+            <h5 class="card-title">John Doe</h5>
+            <p class="card-text">CEO & Founder</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 mx-auto">
+        <div class="card shadow-sm text-center w-75 mx-auto">
+          <img src="{{ url_for('static', filename='img/member1.jpeg') }}" class="card-img-top img-fluid w-75 mx-auto mt-3 rounded" alt="Team Member">
+          <div class="card-body">
+            <h5 class="card-title">Jane Smith</h5>
+            <p class="card-text">Project Manager</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 mx-auto">
+        <div class="card shadow-sm text-center w-75 mx-auto">
+          <img src="{{ url_for('static', filename='img/member2.jpeg') }}" class="card-img-top img-fluid w-75 mx-auto mt-3 rounded" alt="Team Member 3">
+          <div class="card-body">
+            <h5 class="card-title">Emily Johnson</h5>
+            <p class="card-text">Lead Developer</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Our Team Section End -->
+
+<!-- Contact Section Start -->
+<section id="contact" class="py-5" style="background-color: #f8f9fa;">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h4 class="text-primary">Get in Touch</h4>
+      <h1 class="display-4 mb-4">Contact Us</h1>
+      <p class="lead">Have questions or want to work together? Reach out to us and we’ll get back to you as soon as possible!</p>
+    </div>
+
+    <div class="row g-4">
+      <!-- Contact Form -->
+      <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.1s">
+        <div class="bg-white rounded p-4 p-sm-5 shadow">
+          <h3 class="mb-4">Send Us a Message</h3>
+          <form action="/submit-contact" method="POST">
+            <div class="mb-3">
+              <label for="name" class="form-label">Full Name</label>
+              <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" required>
             </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email Address</label>
+              <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="mb-3">
+              <label for="subject" class="form-label">Subject</label>
+              <input type="text" class="form-control" id="subject" name="subject" placeholder="Enter the subject" required>
+            </div>
+            <div class="mb-3">
+              <label for="message" class="form-label">Message</label>
+              <textarea class="form-control" id="message" name="message" rows="5" placeholder="Write your message here..." style="resize: none; width: 100%; height: 262px;" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Send Message</button>
+          </form>
+        </div>
+      </div>
 
-            <!-- Contact Information -->
-            <div class="col-md-6">
-                <div class="card bg-light border-0 p-3">
-                    <h5 class="mb-3">Our Address</h5>
-                    <p><i class="bi bi-geo-alt"></i> 123 Main Street, Colombo 6</p><br>
-                    <h5 class="mb-3">Phone</h5>
-                    <p><i class="bi bi-telephone"></i> +94 762544297</p><br>
-                    <h5 class="mb-3">Email</h5>
-                    <p><i class="bi bi-envelope"></i> info@eprgroupers.com</p><br>
-                    <h5 class="mb-3">Follow Us</h5><br>
-                    <div class="d-flex">
-                        <a href="#" class="me-3"><i class="bi bi-facebook"></i></a>
-                        <a href="#" class="me-3"><i class="bi bi-twitter"></i></a>
-                        <a href="#" class="me-3"><i class="bi bi-linkedin"></i></a>
-                        <a href="#"><i class="bi bi-instagram"></i></a>
-                    </div><br>
-                  <!-- Button to Open Modal -->
-                    <div class="mt-4">
-                      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#scheduleModal">
-                        Schedule a Call
-                      </button>                      
-                    </div>
+      <!-- Contact Information -->
+      <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.1s">
+        <div class="bg-white rounded p-4 p-sm-5 shadow">
+          <h3 class="mb-4">Our Information</h3>
+          <div class="d-flex align-items-center mb-4">
+            <div class="icon bg-primary text-white rounded-circle me-3 p-3">
+              <i class="bi bi-geo-alt"></i>
+            </div>
+            <div>
+              <h5 class="mb-0">Address</h5>
+              <p class="mb-0">123 Main Street, Colombo 6</p>
+            </div>
+          </div>
+          <div class="d-flex align-items-center mb-4">
+            <div class="icon bg-primary text-white rounded-circle me-3 p-3">
+              <i class="bi bi-telephone"></i>
+            </div>
+            <div>
+              <h5 class="mb-0">Phone</h5>
+              <p class="mb-0">+94 762544297</p>
+            </div>
+          </div>
+          <div class="d-flex align-items-center mb-4">
+            <div class="icon bg-primary text-white rounded-circle me-3 p-3">
+              <i class="bi bi-envelope"></i>
+            </div>
+            <div>
+              <h5 class="mb-0">Email</h5>
+              <p class="mb-0">info@eprgroupers.com</p>
+            </div>
+          </div>
+          <div class="d-flex align-items-center mb-4">
+            <div class="icon bg-primary text-white rounded-circle me-3 p-3">
+              <i class="bi bi-share"></i>
+            </div>
+            <div>
+              <h5 class="mb-0">Follow Us</h5>
+              <div class="d-flex mt-2">
+                <a href="#" class="btn btn-outline-primary btn-sm me-2"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="btn btn-outline-primary btn-sm me-2"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="btn btn-outline-primary btn-sm me-2"><i class="bi bi-linkedin"></i></a>
+                <a href="#" class="btn btn-outline-primary btn-sm"><i class="bi bi-instagram"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Schedule a Call Card -->
+        <div class="bg-white rounded p-4 p-sm-5 shadow mt-4 text-center">
+          <h3 class="mb-3">Need a Consultation?</h3>
+          <p class="text-muted">Schedule a call with our experts for personalized support and guidance.</p>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#scheduleModal">
+            Schedule a Call
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Contact Section End -->
 
-                    <!-- Modal Structure -->
-                    <!-- Modal for Scheduling a Call -->
+<!-- Schedule Call Modal -->
 <div class="modal fade" id="scheduleModal" tabindex="-1" aria-labelledby="scheduleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -898,76 +1047,15 @@
     </div>
   </div>
 </div>
-
-<!-- Modal for Entering Details -->
-<div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="detailsModalLabel">Enter Details</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <!-- Left Section -->
-          <div class="col-md-6 border-end">
-            <h4>Introductory Call</h4>
-            <p>Duration: <strong>30 minutes</strong></p>
-            <p id="selected-date-time"></p>
-            <p>We have transformed hundreds of businesses around the world with our expertise. Let's discuss how we can help your business.</p>
-          </div>
-
-          <!-- Right Section -->
-          <div class="col-md-6">
-            <form id="details-form">
-              <div class="mb-3">
-                <label for="name" class="form-label">Name *</label>
-                <input type="text" id="name" name="name" class="form-control" required>
-              </div>
-              <div class="mb-3">
-                <label for="email" class="form-label">Email *</label>
-                <input type="email" id="email" name="email" class="form-control" required>
-              </div>
-              <div class="mb-3">
-                <label for="mobile" class="form-label">Mobile Number *</label>
-                <input type="tel" id="mobile" name="mobile" class="form-control" required>
-              </div>
-              <div class="mb-3">
-                <label for="comments" class="form-label">Please share anything that will help prepare for our meeting</label>
-                <textarea id="comments" name="comments" class="form-control"></textarea>
-              </div>
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary w-100">Schedule Event</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-            </div>
-        </div>
-    </div>
-
-    
-    
-
-
-</section>
-
-
+<!-- Contact END -->
 
     <!-- Courses Section -->
-    <section id="courses" class="courses section">
+    <!-- <section id="courses" class="courses section">
 
-      <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <h2>Courses</h2>
         <p>Popular Courses</p>
-      </div><!-- End Section Title -->
+      </div>
 
       <div class="container">
 
@@ -975,7 +1063,6 @@
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
             <div class="course-item">
-              <!-- <img src="assets/img/course-1.jpg" class="img-fluid" alt="..."> -->
               <img src="{{ url_for('static', filename='img/course-1.jpg') }}" alt="">
               <div class="course-content">
                 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -987,7 +1074,6 @@
                 <p class="description">Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem tempore.</p>
                 <div class="trainer d-flex justify-content-between align-items-center">
                   <div class="trainer-profile d-flex align-items-center">
-                    <!-- <img src="assets/img/trainers/trainer-1-2.jpg" class="img-fluid" alt=""> -->
                     <img src="{{ url_for('static', filename='img/trainers/trainer-1-2.jpg') }}" alt="">
                     <a href="" class="trainer-link">Antonio</a>
                   </div>
@@ -999,7 +1085,7 @@
                 </div>
               </div>
             </div>
-          </div> <!-- End Course Item-->
+          </div> 
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
             <div class="course-item">
@@ -1025,7 +1111,7 @@
                 </div>
               </div>
             </div>
-          </div> <!-- End Course Item-->
+          </div> 
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="300">
             <div class="course-item">
@@ -1051,16 +1137,17 @@
                 </div>
               </div>
             </div>
-          </div> <!-- End Course Item-->
+          </div>
 
         </div>
 
       </div>
 
-    </section><!-- /Courses Section -->
+    </section> -->
+    <!-- /Courses Section -->
 
     <!-- Trainers Index Section -->
-    <section id="trainers-index" class="section trainers-index">
+    <!-- <section id="trainers-index" class="section trainers-index">
 
       <div class="container">
 
@@ -1083,7 +1170,7 @@
                 </div>
               </div>
             </div>
-          </div><!-- End Team Member -->
+          </div>
 
           <div class="col-lg-4 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="200">
             <div class="member">
@@ -1102,7 +1189,7 @@
                 </div>
               </div>
             </div>
-          </div><!-- End Team Member -->
+          </div>
 
           <div class="col-lg-4 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="300">
             <div class="member">
@@ -1121,13 +1208,13 @@
                 </div>
               </div>
             </div>
-          </div><!-- End Team Member -->
 
         </div>
 
       </div>
 
-    </section><!-- /Trainers Index Section -->
+    </section> -->
+    <!-- /Trainers Index Section -->
 
   </main>
 
@@ -1138,22 +1225,21 @@
 </a>
 
 
-  <footer id="footer" class="footer position-relative light-background">
+  <!-- <footer id="footer" class="footer position-relative light-background">
 
     <div class="container footer-top">
       <div class="row gy-4">
         <div class="col-lg-4 col-md-6 footer-about">
           <a href="index.html" class="logo d-flex align-items-center">
-            <span class="sitename">Mentor</span>
+            <span class="sitename">EPR Groupers</span>
           </a>
           <div class="footer-contact pt-3">
-            <p>A108 Adam Street</p>
-            <p>New York, NY 535022</p>
-            <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
-            <p><strong>Email:</strong> <span>info@example.com</span></p>
+            <p>Main Street,</p>
+            <p>Colombo 6, Sri Lanka</p>
+            <p class="mt-3"><strong>Phone:</strong> <span>+94 762544297</span></p>
+            <p><strong>Email:</strong> <span>eprgroupers@gmail.com</span></p>
           </div>
           <div class="social-links d-flex mt-4">
-            <a href=""><i class="bi bi-twitter-x"></i></a>
             <a href=""><i class="bi bi-facebook"></i></a>
             <a href=""><i class="bi bi-instagram"></i></a>
             <a href=""><i class="bi bi-linkedin"></i></a>
@@ -1199,15 +1285,72 @@
     <div class="container copyright text-center mt-4">
       <p>© <span>Copyright</span> <strong class="px-1 sitename">Mentor</strong> <span>All Rights Reserved</span></p>
       <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you've purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
         Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> Distributed by <a href=“https://themewagon.com>ThemeWagon
       </div>
     </div>
 
+  </footer> -->
+
+  <footer id="footer" class="footer position-relative" style="background-color: #000; color: #fff; padding: 50px 0;">
+
+    <div class="container footer-top">
+      <div class="row gy-4 justify-content-between">
+        
+        <!-- About Section -->
+        <div class="col-lg-4 col-md-4 footer-about">
+          <a href="index.html" class="logo d-flex align-items-center">
+            <span class="sitename" style="color: #00aaff; font-size: 24px; font-weight: bold;">EPR GROUPERS</span>
+          </a>
+          <div class="footer-contact pt-3">
+            <p>No. 343, Main Street,</p>
+            <p>Colombo 6, Sri Lanka</p>
+            <p class="mt-3"><strong>Phone:</strong> <span>+94 762544297</span></p>
+            <p><strong>Email:</strong> <span>eprgroupers@gmail.com</span></p>
+          </div>
+          <div class="social-links d-flex mt-4">
+            <a href="#" target="_blank" class="social-icon"><i class="bi bi-linkedin"></i></a>
+            <a href="#" target="_blank" class="social-icon"><i class="bi bi-github"></i></a>
+            <a href="#" target="_blank" class="social-icon"><i class="bi bi-facebook"></i></a>
+          </div>
+        </div>
+  
+        <!-- Useful Links -->
+        <div class="col-lg-2 col-md-4 footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Schedule a Call</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+  
+        <!-- Services -->
+        <div class="col-lg-2 col-md-4 footer-links">
+          <h4>Our Services</h4>
+          <ul>
+            <li><a href="#">Software Development</a></li>
+            <li><a href="#">Cloud Solutions</a></li>
+            <li><a href="#">AI & Machine Learning</a></li>
+            <li><a href="#">Cybersecurity</a></li>
+            <li><a href="#">IT Consulting</a></li>
+          </ul>
+        </div>
+  
+      </div>
+    </div>
+  
+    <!-- Copyright & Credits -->
+    <div class="container text-center mt-4">
+      <p style="margin: 0; font-size: 14px;">© 2025 <strong class="sitename" style="color: #00aaff;">EPR GROUPERS</strong> | All Rights Reserved</p>
+    </div>
+  
   </footer>
+  
+
+  
+  
 
   <!-- Scroll Top -->
   <!-- <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a> -->
