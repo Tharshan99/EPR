@@ -366,6 +366,27 @@
     }
   }
 
+/* recent projects */
+
+  /* Make all cards the same size */
+  .project-card {
+    height: 400px !important; /* Adjust to desired height */
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+  }
+
+  /* Set uniform image size */
+  .project-img {
+    height: 200px !important; /* Adjust based on preference */
+    object-fit: cover !important; /* Ensures images fill space without distortion */
+  }
+
+  /* Ensure card content aligns properly */
+  .project-card .card-body {
+    flex-grow: 1 !important;
+    text-align: center !important;
+  }
 </style>
 
 <body class="index-page">
@@ -824,28 +845,28 @@
     </div>
     <div class="row g-4">
       <div class="col-lg-4 col-md-6">
-        <div class="card shadow-sm">
-          <img src="{{ url_for('static', filename='img/projects/project1.jpg') }}" class="card-img-top" alt="Project 1">
+        <div class="card shadow-sm project-card">
+          <img src="{{ url_for('static', filename='img/erp.jpg') }}" class="card-img-top project-img" alt="Project 1">
           <div class="card-body">
-            <h5 class="card-title">Project One</h5>
+            <h5 class="card-title">ERP</h5>
             <p class="card-text">A brief description of the project goes here.</p>
           </div>
         </div>
       </div>
       <div class="col-lg-4 col-md-6">
-        <div class="card shadow-sm">
-          <img src="{{ url_for('static', filename='img/projects/project2.jpg') }}" class="card-img-top" alt="Project 2">
+        <div class="card shadow-sm project-card">
+          <img src="{{ url_for('static', filename='img/crm.jpg') }}" class="card-img-top project-img" alt="Project 2">
           <div class="card-body">
-            <h5 class="card-title">Project Two</h5>
+            <h5 class="card-title">CRM</h5>
             <p class="card-text">A brief description of the project goes here.</p>
           </div>
         </div>
       </div>
       <div class="col-lg-4 col-md-6">
-        <div class="card shadow-sm">
-          <img src="{{ url_for('static', filename='img/projects/project3.jpg') }}" class="card-img-top" alt="Project 3">
+        <div class="card shadow-sm project-card">
+          <img src="{{ url_for('static', filename='img/pos.jpg') }}" class="card-img-top project-img" alt="Project 3">
           <div class="card-body">
-            <h5 class="card-title">Project Three</h5>
+            <h5 class="card-title">POS</h5>
             <p class="card-text">A brief description of the project goes here.</p>
           </div>
         </div>
@@ -853,6 +874,7 @@
     </div>
   </div>
 </section>
+
 <!-- Recent Projects Section End -->
 
 <!-- Our Team Section Start -->
